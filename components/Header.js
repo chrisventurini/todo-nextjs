@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
-import TextField from '@material-ui/core/TextField';
+import InputBase from '@material-ui/core/InputBase';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -15,14 +15,20 @@ const styles = theme => ({
     form: {
         flexGrow: 1,
     },
-    color: {
-      color: 'white'
+    button: {
+        color: 'white',
+        marginLeft: '10px'
     },
     toDoInput: {
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
+        borderRadius: theme.shape.borderRadius,
+        padding: '5px',
+        paddingLeft: '10px',
+        paddingRight: '10px',
+        width: '300px'
     }
 });
 
@@ -66,17 +72,15 @@ class Header extends Component {
                 <Toolbar>
                     <Typography variant="h6" color="inherit">
                         <form className={classes.form} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                            <TextField
+                            <InputBase
                                 id="to-do-input"
                                 className={classes.toDoInput}
-                                label="Enter To Do"
-                                placeholder="To Do"
-                                margin="normal"
+                                placeholder="Todo"
                                 value={this.state.toDoTitle}
                                 variant="outlined"
                                 onChange={this.handleInputChange}
                             />
-                            <Button className={classes.color}>Create</Button>
+                            <Button className={classes.button}>Create Todo</Button>
                         </form>
                     </Typography>
                 </Toolbar>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import List from '@material-ui/core/List';
 
-import ToDoItem from './ToDoItem';
+import ToDoItem from './TodoItem';
 
 class ToDoList extends Component {
 
