@@ -14,10 +14,13 @@
   "dependencies": {
     "@material-ui/core": "^3.3.2",
     "@zeit/next-sass": "^1.0.1",
+    "moment": "^2.22.2",
     "next": "7.0.2",
     "node-sass": "^4.9.4",
     "react": "16.6.0",
     "react-dom": "16.6.0",
+    "react-jss": "^8.6.1",
+    "react-moment": "^0.8.3",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1"
   }

@@ -1,10 +1,12 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -17,7 +19,11 @@ const styles = theme => ({
     },
     button: {
         color: 'white',
-        marginLeft: '10px'
+        marginLeft: '20px'
+    },
+    dateInput: {
+        color: 'white',
+        marginLeft: '20px'
     },
     toDoInput: {
         backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -35,40 +41,55 @@ const styles = theme => ({
 class Header extends Component {
 
     state = {
-        toDoTitle: ''
+        todoTitle: '',
+        todoDate: new Date()
     };
 
     constructor(props) {
         super(props);
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleTodoInputChange = this.handleTodoInputChange.bind(this);
+        this.handleTodoDateChange = this.handleTodoDateChange.bind(this);
     }
 
-    _setToDoState(title) {
+    _setTodoDate(date) {
         this.setState({
             ...this.state,
-            toDoTitle: title
+            todoDate: date
+        })
+    }
+
+    _setToDoTitle(title) {
+        this.setState({
+            ...this.state,
+            todoTitle: title
         });
     }
 
-    handleInputChange(event) {
-        this._setToDoState(event.target.value);
+    handleTodoDateChange(event) {
+        let date = moment(event.target.value, 'YYYY-MM-DD').toDate();
+        this._setTodoDate(date);
+    }
+
+    handleTodoInputChange(event) {
+        this._setToDoTitle(event.target.value);
     }
 
     handleSubmit(event) {
         event.preventDefault();
         this.props.dispatch(toDoSubmitted({
-            title: this.state.toDoTitle
+            title: this.state.todoTitle,
+            dueDate: this.state.todoDate
          }));
-        this._setToDoState('');
+        this._setToDoTitle('');
     }
 
     render() {
         let { classes } = this.props;
 
         return (
-            <AppBar>
+            <AppBar id="header">
                 <Toolbar>
                     <Typography variant="h6" color="inherit">
                         <form className={classes.form} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
@@ -76,9 +97,17 @@ class Header extends Component {
                                 id="to-do-input"
                                 className={classes.toDoInput}
                                 placeholder="Todo"
-                                value={this.state.toDoTitle}
+                                value={this.state.todoTitle}
                                 variant="outlined"
-                                onChange={this.handleInputChange}
+                                onChange={this.handleTodoInputChange}
+                            />
+                            <TextField
+                                id="due-date"
+                                className={classes.dateInput}
+                                label="Due Date"
+                                type="date"
+                                value={moment(this.state.todoDate).format('YYYY-MM-DD')}
+                                onChange={this.handleTodoDateChange}
                             />
                             <Button className={classes.button}>Create Todo</Button>
                         </form>
