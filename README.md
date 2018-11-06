@@ -14,3 +14,11 @@ As part of the commit...ment (pun intended) to the challenge, I am making all my
 * [Facebook](https://www.facebook.com/ChrisMVenturini/)
 
 This is my code as I progress through the [Next.js tutorials](https://nextjs.org/learn/).
+
+#### How to build and run locally (assume you have NodeJS and git installed)
+- clone the repo via `git clone https://github.com/chrisventurini/todo-nextjs`
+- cd todo-nextjs
+- npm install
+- npm run build
+- npm run start
+- launch your browser and load localhost:3000 in address bar.
