@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 
 import { SheetsRegistry } from 'jss';
 import JssProvider from 'react-jss/lib/JssProvider';
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme, createGenerateClassName }
+    from '@material-ui/core/styles';
 
-// Sets up the material ui
 const sheetsRegistry = new SheetsRegistry();
 const sheetsManager = new Map();
 const theme = createMuiTheme();

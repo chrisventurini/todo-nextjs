@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import Header from '../components/Header'
-import TodoList from '../components/ToDoList'
+import TodoList from '../components/TodoList'
 
 import '../styles.scss';
 

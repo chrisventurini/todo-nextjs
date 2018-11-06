@@ -1,9 +1,12 @@
+import Link from 'next/link'
+
+import moment from 'moment';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = () => ({
     listItem: {
         borderTop: '1px solid black'
     }
@@ -11,12 +14,16 @@ const styles = theme => ({
 
 
 let TodoItem = (props) => {
-    let { classes, title } = props;
+    let { dueDate, classes, title } = props;
 
     return (
         <ListItem className={classes.listItem}>
             <Checkbox tabIndex={-1} disableRipple />
-            <ListItemText primary={title} />
+            <Link href="/todo">
+                <a>
+                    <ListItemText primary={title} secondary={`Due: ${ moment(dueDate).format('MM/DD/YYYY') }`} />
+                </a>
+            </Link>
         </ListItem>
     )
 };

@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-import { toDoSubmitted } from '../actions/toDoSubmitted';
+import { todoSubmitted } from '../actions/todoSubmitted';
 
 const styles = theme => ({
     form: {
@@ -78,7 +78,7 @@ class Header extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.dispatch(toDoSubmitted({
+        this.props.dispatch(todoSubmitted({
             title: this.state.todoTitle,
             dueDate: this.state.todoDate
          }));
@@ -109,7 +109,7 @@ class Header extends Component {
                                 value={moment(this.state.todoDate).format('YYYY-MM-DD')}
                                 onChange={this.handleTodoDateChange}
                             />
-                            <Button className={classes.button}>Create Todo</Button>
+                            <Button type='submit' className={classes.button}>Create Todo</Button>
                         </form>
                     </Typography>
                 </Toolbar>

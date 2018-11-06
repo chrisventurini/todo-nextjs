@@ -1,1 +1,1 @@
-export { TO_DO_SUBMITTED, toDoSubmitted } from './toDoSubmitted'
+export { TODO_SUBMITTED, todoSubmitted } from './todoSubmitted'

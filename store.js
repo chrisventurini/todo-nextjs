@@ -1,23 +1,23 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import {TO_DO_SUBMITTED} from "./actions";
+import {TODO_SUBMITTED} from "./actions";
 
 const dupState = state => {
     let newState = {...state};
-    newState.toDos = newState.toDos.slice(0);
+    newState.todos = newState.todos.slice(0);
     return newState;
 };
 
 let defaulState = {
-    toDos: []
+    todos: []
 };
 
 export default createStore((state = defaulState, data) => {
     let newState;
 
     switch (data.type) {
-        case TO_DO_SUBMITTED:
+        case TODO_SUBMITTED:
             newState = dupState(state);
-            newState.toDos.push(data.toDo);
+            newState.todos.push(data.todo);
             break;
         default:
             newState = state;
