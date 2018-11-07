@@ -11,7 +11,6 @@ As part of the commit...ment (pun intended) to the challenge, I am making all my
 
 * [Twitter](https://twitter.com/ChrisMVenturini)
 * [Instagram](https://www.instagram.com/chrismventurini/)
-* [Facebook](https://www.facebook.com/ChrisMVenturini/)
 
 This is my code as I progress through the [Next.js tutorials](https://nextjs.org/learn/).
 
