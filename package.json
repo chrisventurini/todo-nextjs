@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "dev": "node server.js",
+    "build": "next build"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +13,8 @@
   "dependencies": {
     "@material-ui/core": "^3.3.2",
     "@zeit/next-sass": "^1.0.1",
+    "express": "^4.16.4",
+    "isomorphic-unfetch": "^3.0.0",
     "moment": "^2.22.2",
     "next": "7.0.2",
     "node-sass": "^4.9.4",
@@ -22,6 +23,8 @@
     "react-jss": "^8.6.1",
     "react-moment": "^0.8.3",
     "react-redux": "^5.1.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "sequelize": "^4.41.1",
+    "sqlite3": "^4.0.3"
   }
 }

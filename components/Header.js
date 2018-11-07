@@ -79,8 +79,9 @@ class Header extends Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.dispatch(todoSubmitted({
-            title: this.state.todoTitle,
-            dueDate: this.state.todoDate
+            dueDate: this.state.todoDate,
+            id: Math.round(Math.random() * 100),
+            title: this.state.todoTitle
          }));
         this._setToDoTitle('');
     }

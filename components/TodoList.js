@@ -9,7 +9,7 @@ class TodoList extends Component {
 
     render () {
         let todos = this.props.todos.map((todo) => {
-           return (<TodoItem title={ todo.title } dueDate={ todo.dueDate } />)
+           return (<TodoItem todo={ todo } />)
         });
 
         return (
@@ -22,6 +22,7 @@ class TodoList extends Component {
 }
 
 export default connect(state => {
+    console.log(arguments);
     return {
         todos: state.todos
     }

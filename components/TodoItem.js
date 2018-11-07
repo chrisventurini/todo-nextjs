@@ -14,12 +14,13 @@ const styles = () => ({
 
 
 let TodoItem = (props) => {
-    let { dueDate, classes, title } = props;
+    let { classes } = props;
+    let { dueDate, id, title } = props.todo;
 
     return (
         <ListItem className={classes.listItem}>
             <Checkbox tabIndex={-1} disableRipple />
-            <Link href="/todo">
+            <Link href={"/todo?id=" + id} >
                 <a>
                     <ListItemText primary={title} secondary={`Due: ${ moment(dueDate).format('MM/DD/YYYY') }`} />
                 </a>
