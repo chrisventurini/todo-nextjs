@@ -8,14 +8,6 @@ import TodoItem from './TodoItem';
 
 class TodoList extends Component {
 
-    static async getInitialProps() {
-        let res = await fetch('/api/todos');
-        let data =  await res.json();
-
-        console.log('init props: ' + data);
-        return data;
-    }
-
     render () {
         let todos = this.props.todos.map((todo) => {
            return (<TodoItem todo={ todo } />)
@@ -31,7 +23,7 @@ class TodoList extends Component {
 }
 
 export default connect(state => {
-    console.log('connect called: ' + state);
+    console.log(state.todo);
     return {
         todos: state.todos
     }

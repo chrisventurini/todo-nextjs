@@ -1,13 +1,16 @@
 const express = require('express');
+const todoRepository = require('../data/todoRepository');
 
 module.exports = function (app) {
     let todoRouter = express.Router();
     todoRouter.route('/todos')
-        .get((req, res) => {
-            res.json([{
-                dueDate: new Date(),
-                title: 'testing 123'
-            }]);
+        .get(async function(req, res) {
+            let data = await todoRepository.getAll();
+            res.send(data);
+        })
+        .post((req, res) => {
+            todoRepository.save(req.body);
+            res.send("Success");
         });
 
     app.use('/api', todoRouter);

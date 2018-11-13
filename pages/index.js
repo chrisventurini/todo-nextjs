@@ -1,17 +1,21 @@
-import { connect } from 'react-redux'
-
-import Header from '../components/Header'
-import TodoList from '../components/TodoList'
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import Header from '../components/Header';
+import TodoList from '../components/TodoList';
 
 import '../styles.scss';
 
-function Index() {
-    return (
-        <div>
-            <Header/>
-            <TodoList/>
-        </div>
-    )
+class Index extends Component {
+
+    render() {
+        return (
+            <div>
+                <Header/>
+                <TodoList />
+            </div>
+        )
+    }
+
 }
 
 export default connect()(Index)

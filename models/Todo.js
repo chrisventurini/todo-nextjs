@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    let Todo = sequelize.define('todo', {
+    let Todo = sequelize.define('Todo', {
         id: {
             type:DataTypes.UUID,
             primaryKey: true,

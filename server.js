@@ -10,9 +10,10 @@ let startApp = () => {
     app.prepare()
         .then(() => {
             const server = express();
+            server.use(express.urlencoded({extended: true}));
+            server.use(express.json());
 
             require('./api')(server);
-
             server.get('*', (req, res) => {
                 return handle(req, res)
             });
