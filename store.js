@@ -42,6 +42,7 @@ let store = createStore((state = defaultState, data) => {
 
 initSagas(sagaMiddleware);
 
+// Initial data load
 fetch('http://localhost:3000/api/todos')
     .then(async function(resp)  {
         let data = await resp.json();

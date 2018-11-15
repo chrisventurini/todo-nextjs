@@ -14,7 +14,7 @@ class TodoList extends Component {
         });
 
         return (
-            <List id="to-do-list">
+            <List id="todo-list">
                 {todos}
             </List>
         )
@@ -23,7 +23,6 @@ class TodoList extends Component {
 }
 
 export default connect(state => {
-    console.log(state.todo);
     return {
         todos: state.todos
     }
