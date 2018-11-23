@@ -19,5 +19,5 @@ This is my code as I progress through the [Next.js tutorials](https://nextjs.org
 - cd todo-nextjs
 - npm install
 - npm run build
-- npm run start
+- npm run dev
 - launch your browser and load localhost:3000 in address bar.
