@@ -38,7 +38,7 @@ const styles = theme => ({
     }
 });
 
-class Header extends Component {
+class CreationHeader extends Component {
 
     state = {
         todoTitle: '',
@@ -119,4 +119,4 @@ class Header extends Component {
 
 }
 
-export default withStyles(styles)(connect()(Header));
+export default withStyles(styles)(connect()(CreationHeader));

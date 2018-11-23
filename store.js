@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import {INITIAL_LOAD, initialLoad, TODO_SUBMITTED} from "./actions";
+import {INITIAL_LOAD, initialLoad, TODO_EDITED, TODO_SUBMITTED} from "./actions";
 import createSagaMiddleware from 'redux-saga';
 import fetch from 'isomorphic-unfetch';
 import { initSagas } from './initSagas';
@@ -28,6 +28,15 @@ let store = createStore((state = defaultState, data) => {
     switch (data.type) {
         case INITIAL_LOAD:
             newState = { todos: data.todos };
+            break;
+        case TODO_EDITED:
+            newState = dupState(state);
+            newState.todos = newState.todos.map(todo => {
+                if(todo.id === data.todo.id) {
+                    return data.todo;
+                }
+               return todo;
+            });
             break;
         case TODO_SUBMITTED:
             newState = dupState(state);

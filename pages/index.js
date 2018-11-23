@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
+import CreationHeader from '../components/CreationHeader';
 import TodoList from '../components/TodoList';
 
 import '../styles.scss';
@@ -10,7 +10,7 @@ class Index extends Component {
     render() {
         return (
             <div>
-                <Header/>
+                <CreationHeader/>
                 <TodoList />
             </div>
         )

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { Component } from 'react';
-import Header from '../components/Header';
+import React, { Component } from 'react';
+import EditHeader from '../components/EditHeader'
 import Todo from '../components/Todo';
 
 import '../styles.scss';
@@ -18,7 +18,7 @@ class TodoPage extends Component {
     render () {
         return (
             <div>
-                <Header />
+                <EditHeader />
                 <Todo id={this.props.id}/>
             </div>
         )

@@ -1,7 +1,7 @@
 import {TODO_SUBMITTED} from "../actions";
 import * as effects from 'redux-saga/effects'
 
-export function* todoSaga() {
+export function* todoSubmittedSaga() {
     yield effects.takeEvery(TODO_SUBMITTED, function* ({todo}) {
         yield fetch('http://localhost:3000/api/todos', {
            method: 'POST',
