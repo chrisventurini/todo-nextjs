@@ -8,8 +8,12 @@ module.exports = function (app) {
             let data = await todoRepository.getAll();
             res.send(data);
         })
-        .post((req, res) => {
-            todoRepository.save(req.body);
+        .post(async function(req, res) {
+            let todo = await todoRepository.save(req.body);
+            res.send(todo);
+        })
+        .patch(async function(req, res) {
+            await todoRepository.update(req.body);
             res.send("Success");
         });
 
