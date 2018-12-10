@@ -11,15 +11,15 @@ class TodoPage extends Component {
         let { id } = context.query;
 
         return {
-            id: id
+            todoId: id
         }
     }
 
     render () {
         return (
-            <div>
+            <div id="edit-page">
                 <EditHeader />
-                <Todo id={this.props.id}/>
+                <Todo todoId={this.props.todoId}/>
             </div>
         )
     }

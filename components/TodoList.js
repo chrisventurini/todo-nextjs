@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import fetch from 'isomorphic-unfetch'
 
 import List from '@material-ui/core/List';
 
@@ -10,7 +9,7 @@ class TodoList extends Component {
 
     render () {
         let todos = this.props.todos.map((todo) => {
-           return (<TodoItem id={todo.id} todo={ todo } />)
+           return (<TodoItem key={todo.id} id={todo.id} todo={ todo } />)
         });
 
         return (

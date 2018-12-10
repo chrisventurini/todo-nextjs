@@ -15,7 +15,6 @@ const styles = () => ({
     }
 });
 
-
 class TodoItem extends Component {
 
     constructor(props) {
@@ -25,7 +24,10 @@ class TodoItem extends Component {
     }
 
     onChange(event) {
-        let todo = this.props.todo;
+        let todo = {
+            ...this.props.todo
+        };
+
         todo.completed = event.target.checked;
         this.props.dispatch(todoEdited(todo))
     }
@@ -49,6 +51,7 @@ class TodoItem extends Component {
 
 export default withStyles(styles())(connect((state, ownProps) => {
     let todo = state.todos.find(todo => todo.id === ownProps.id);
+
     return {
         todo
     };

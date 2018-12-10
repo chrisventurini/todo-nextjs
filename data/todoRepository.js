@@ -19,6 +19,7 @@ let todoRepository = {
                 id: todo.id
             }
         });
+
         await todoModel.update(todo);
 
         return todo;

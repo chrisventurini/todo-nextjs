@@ -1,4 +1,4 @@
-import {TODO_EDITED } from "../actions";
+import { TODO_EDITED } from "../actions";
 import * as effects from 'redux-saga/effects'
 
 export function* todoEditedSaga() {

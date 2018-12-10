@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import TextField from '@material-ui/core/TextField';
 
 import { todoEdited } from '../actions';
 
@@ -13,9 +15,17 @@ class Todo extends Component {
         super(props);
 
         this.state = props.todo;
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCompletedChange = this.handleCompletedChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTitleChange = this.handleTitleChange.bind(this);
+    }
+
+    handleCompletedChange(event) {
+        this.setState({
+            ...this.state,
+            completed: event.target.checked
+        });
     }
 
     handleDateChange(event) {
@@ -37,6 +47,7 @@ class Todo extends Component {
         event.preventDefault();
 
         this.props.dispatch(todoEdited({
+            completed: this.state.completed,
             dueDate: this.state.dueDate,
             id: this.state.id,
             notes: this.state.notes,
@@ -54,6 +65,17 @@ class Todo extends Component {
                     margin="normal"
                     onChange={this.handleTitleChange}
                     value={this.state.title}
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            onChange={this.handleCompletedChange}
+                            checked={this.state.completed}
+                            color="primary"
+                            value={this.state.completed}
+                        />
+                    }
+                    label="Completed"
                 />
                 <TextField
                     id="due-date"
@@ -77,7 +99,7 @@ class Todo extends Component {
 }
 
 export default connect((state, ownProps) => {
-    let todo = state.todos.find(todo => todo.id === ownProps.id);
+    let todo = state.todos.find(todo => todo.id === ownProps.todoId);
 
     return {
         todo
