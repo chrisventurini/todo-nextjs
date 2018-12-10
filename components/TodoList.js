@@ -10,7 +10,7 @@ class TodoList extends Component {
 
     render () {
         let todos = this.props.todos.map((todo) => {
-           return (<TodoItem todo={ todo } />)
+           return (<TodoItem id={todo.id} todo={ todo } />)
         });
 
         return (

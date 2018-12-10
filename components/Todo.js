@@ -35,7 +35,6 @@ class Todo extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.props);
 
         this.props.dispatch(todoEdited({
             dueDate: this.state.dueDate,

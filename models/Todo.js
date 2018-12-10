@@ -5,6 +5,7 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
+        completed: DataTypes.BOOLEAN,
         title: DataTypes.STRING,
         notes: DataTypes.STRING,
     });

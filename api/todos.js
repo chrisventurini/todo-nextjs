@@ -13,8 +13,8 @@ module.exports = function (app) {
             res.send(todo);
         })
         .patch(async function(req, res) {
-            await todoRepository.update(req.body);
-            res.send("Success");
+            let todo = await todoRepository.update(req.body);
+            res.send(todo);
         });
 
     app.use('/api', todoRouter);
