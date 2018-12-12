@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import Link from 'next/link';
+import Router from 'next/router';
 import moment from 'moment';
 
 import Button from '@material-ui/core/Button';
@@ -15,64 +17,56 @@ class Todo extends Component {
         super(props);
 
         this.state = props.todo;
-        this.handleCompletedChange = this.handleCompletedChange.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
+        this.state.notes = this.state.notes || '';
+
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleTitleChange = this.handleTitleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+
     }
 
-    handleCompletedChange(event) {
-        this.setState({
-            ...this.state,
-            completed: event.target.checked
-        });
-    }
+    handleInputChange(event) {
+        let target = event.target;
+        let value = target.type === 'checkbox' ? target.checked : target.value;
+        let name = target.name;
 
-    handleDateChange(event) {
-        let date = moment(event.target.value, 'YYYY-MM-DD').toDate();
-        this.setState({
-            ...this.state,
-            dueDate: date
-        });
-    }
+        if (event.type === 'date') {
+            value = moment(value).format('YYYY-MM-DD');
+        }
 
-    handleTitleChange(event) {
         this.setState({
             ...this.state,
-            title: event.target.value
+            [name]: value
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
-        this.props.dispatch(todoEdited({
-            completed: this.state.completed,
-            dueDate: this.state.dueDate,
-            id: this.state.id,
-            notes: this.state.notes,
-            title: this.state.title
-        }));
+        this.props.dispatch(todoEdited({...this.state}));
+
+        Router.push('/');
     }
 
     render () {
+        let dueDate = moment(this.state.dueDate).format('YYYY-MM-DD');
 
         return (
-            <form id="todo" onSubmit={this.handleSubmit}>
+            <form id="todo-edit" onSubmit={this.handleSubmit}>
                 <TextField
-                    id="standard-name"
                     label="Title"
+                    name="title"
                     margin="normal"
-                    onChange={this.handleTitleChange}
+                    onChange={this.handleInputChange}
                     value={this.state.title}
                 />
                 <FormControlLabel
+                    id="todo-edit-check"
                     control={
                         <Checkbox
-                            onChange={this.handleCompletedChange}
+                            name="completed"
+                            onChange={this.handleInputChange}
                             checked={this.state.completed}
                             color="primary"
-                            value={this.state.completed}
                         />
                     }
                     label="Completed"
@@ -81,17 +75,27 @@ class Todo extends Component {
                     id="due-date"
                     label="Due Date"
                     type="date"
-                    onChange={this.handleDateChange}
-                    value={moment(this.state.dueDate).format('YYYY-MM-DD')}
+                    name="dueDate"
+                    onChange={this.handleInputChange}
+                    value={dueDate}
                 />
                 <TextField
                     id="notes"
                     label="Notes"
+                    name="notes"
+                    onChange={this.handleInputChange}
                     value={this.state.notes}
                 />
-                <Button type="submit" variant="contained" color="primary">
-                   Save
-                </Button>
+                <div id="todo-edit-controls">
+                    <Button type="submit" variant="contained" color="primary">
+                       Save
+                    </Button>
+                    <Link href="/">
+                        <Button variant="contained" color="secondary">
+                            Cancel
+                        </Button>
+                    </Link>
+                </div>
             </form>
         )
     }

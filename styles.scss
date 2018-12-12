@@ -2,19 +2,53 @@ body {
     margin: 0;
 }
 
-#header * {
-    color: white;
+#header {
+    button {
+        color: black;
+        background-color: white;
+        margin-left: 20px;
+    }
+
+    input, label, svg {
+      color: white;
+    }
 }
 
-#todo-list, #todo {
+#todo-edit {
+    padding: 10px 25px;
+
+    #todo-edit-check {
+        padding-left: 5px;
+    }
+
+    #todo-edit-controls {
+        margin-top: 10px;
+        width: 100%;
+
+        button {
+            margin: 0 10px;
+        }
+    }
+
+    > div, #todo-edit-check {
+        padding-bottom: 10px;
+        width: 100%;
+    }
+}
+
+#todo-list, #todo-edit {
     margin-top: 55px;
 
     a {
         text-decoration: none;
+
+        :hover {
+            text-decoration: underline;
+        }
+
+        p:hover {
+            text-decoration: none;
+        }
     }
 }
 
-#todo > div {
-    padding-bottom: 10px;
-    width: 100%;
-}

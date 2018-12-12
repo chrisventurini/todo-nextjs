@@ -17,10 +17,6 @@ const styles = theme => ({
     form: {
         flexGrow: 1,
     },
-    button: {
-        color: 'white',
-        marginLeft: '20px'
-    },
     dateInput: {
         color: 'white',
         marginLeft: '20px'
@@ -49,40 +45,34 @@ class CreationHeader extends Component {
         super(props);
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleTodoInputChange = this.handleTodoInputChange.bind(this);
-        this.handleTodoDateChange = this.handleTodoDateChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    _setTodoDate(date) {
-        this.setState({
-            ...this.state,
-            todoDate: date
-        })
-    }
+    handleInputChange(event) {
+        let target = event.target;
+        let value = target.value;
+        let name = target.name;
 
-    _setToDoTitle(title) {
+        if (target.type === 'date') {
+            value = moment(value).format('YYYY-MM-DD');
+        }
+
         this.setState({
             ...this.state,
-            todoTitle: title
+            [name]: value
         });
-    }
-
-    handleTodoDateChange(event) {
-        let date = moment(event.target.value, 'YYYY-MM-DD').toDate();
-        this._setTodoDate(date);
-    }
-
-    handleTodoInputChange(event) {
-        this._setToDoTitle(event.target.value);
     }
 
     handleSubmit(event) {
         event.preventDefault();
         this.props.dispatch(todoSubmitted({
-            dueDate: this.state.todoDate,
-            title: this.state.todoTitle
-         }));
-        this._setToDoTitle('');
+            ...this.state
+        }));
+
+        this.setState({
+           title: '',
+           dueDate: new Date()
+        });
     }
 
     render() {
@@ -96,18 +86,20 @@ class CreationHeader extends Component {
                             <InputBase
                                 id="to-do-input"
                                 className={classes.toDoInput}
-                                placeholder="Todo"
-                                value={this.state.todoTitle}
+                                placeholder="Title"
+                                name="title"
+                                value={this.state.title}
                                 variant="outlined"
-                                onChange={this.handleTodoInputChange}
+                                onChange={this.handleInputChange}
                             />
                             <TextField
                                 id="due-date"
                                 className={classes.dateInput}
                                 label="Due Date"
+                                name="dueDate"
                                 type="date"
-                                value={moment(this.state.todoDate).format('YYYY-MM-DD')}
-                                onChange={this.handleTodoDateChange}
+                                value={moment(this.state.dueDate).format('YYYY-MM-DD')}
+                                onChange={this.handleInputChange}
                             />
                             <Button type='submit' className={classes.button}>Create Todo</Button>
                         </form>
