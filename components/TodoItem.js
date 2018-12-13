@@ -2,18 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'next/link';
 import moment from 'moment';
+
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { withStyles } from '@material-ui/core/styles';
 
 import { todoEdited } from "../actions";
 
-const styles = () => ({
-    listItem: {
-        borderTop: '1px solid black'
-    }
-});
 
 class TodoItem extends Component {
 
@@ -33,11 +28,10 @@ class TodoItem extends Component {
     }
 
     render() {
-        let { classes } = this.props;
         let { dueDate, id, title, completed } = this.props.todo;
 
         return (
-            <ListItem className={classes.listItem}>
+            <ListItem className="todo-item" >
                 <Checkbox checked={completed} onChange={this.onChange} tabIndex={-1} disableRipple />
                 <Link prefetch href={"/todo?id=" + id} >
                     <a>
@@ -49,10 +43,10 @@ class TodoItem extends Component {
     }
 }
 
-export default withStyles(styles())(connect((state, ownProps) => {
+export default connect((state, ownProps) => {
     let todo = state.todos.find(todo => todo.id === ownProps.id);
 
     return {
         todo
     };
-})(TodoItem));
+})(TodoItem);
