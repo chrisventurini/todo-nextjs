@@ -22,7 +22,11 @@ class TodoList extends Component {
 }
 
 export default connect(state => {
-    return {
-        todos: state.todos
+    let todos = state.todos;
+
+    if(state.filters && state.filters.completed) {
+        todos = todos.filter(todo => !todo.completed);
     }
+
+    return { todos }
 })(TodoList)

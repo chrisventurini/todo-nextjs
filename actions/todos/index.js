@@ -5,27 +5,22 @@ import { TODO_EDITED, todoEdited } from './todoEdited'
 import { TODO_SAVED, todoSaved } from './todoSaved'
 import { TODO_SUBMITTED, todoSubmitted } from './todoSubmitted'
 
-const todoActions = {
+export const actions = {
   initialLoad,
   todoEdited,
   todoSaved,
   todoSubmitted
 };
 
-const todoActionTypes = {
+export const actionTypes = {
   INITIAL_LOAD,
   TODO_EDITED,
   TODO_SAVED,
   TODO_SUBMITTED
 };
 
-const mapDispatchToTodoActions = dispatch => {
-    return { actions: bindActionCreators(todoActions, dispatch) };
+export const mapDispatchToTodoActions = dispatch => {
+    return { actions: bindActionCreators(actions, dispatch) };
 };
 
-export {
-    todoActions,
-    todoActionTypes,
-    mapDispatchToTodoActions
-};
 

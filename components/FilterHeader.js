@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 
+import { mapDispatchToFilterActions } from '../actions/filtering'
+
 import Chip from '@material-ui/core/Chip';
 import RadioButtonUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonChecked from '@material-ui/icons/RadioButtonChecked';
+
+
 
 class FilterHeader extends Component {
 
@@ -18,6 +22,7 @@ class FilterHeader extends Component {
     }
 
     handleFilterClicked() {
+        this.props.actions.toggleFilterCompleted();
         this.setState({
             filterCompleted: !this.state.filterCompleted
         });
@@ -39,4 +44,6 @@ class FilterHeader extends Component {
 
 }
 
-export default connect()(FilterHeader);
+const mapState = state => state;
+
+export default connect(mapState, mapDispatchToFilterActions)(FilterHeader);

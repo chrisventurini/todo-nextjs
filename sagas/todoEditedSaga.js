@@ -1,8 +1,8 @@
-import { todoActionTypes } from "../actions";
+import { actionTypes } from "../actions/todos/index";
 import * as effects from 'redux-saga/effects'
 
 export function* todoEditedSaga() {
-    yield effects.takeEvery(todoActionTypes.TODO_EDITED, function* ({todo}) {
+    yield effects.takeEvery(actionTypes.TODO_EDITED, function* ({todo}) {
         yield fetch('http://localhost:3000/api/todos', {
            method: 'PATCH',
             headers: {

@@ -1,8 +1,8 @@
-import { todoActionTypes, todoActions } from "../actions";
+import { actionTypes, actions } from "../actions/todos/index";
 import * as effects from 'redux-saga/effects'
 
 export function* todoSubmittedSaga() {
-    yield effects.takeEvery(todoActionTypes.TODO_SUBMITTED, function* ({todo}) {
+    yield effects.takeEvery(actionTypes.TODO_SUBMITTED, function* ({todo}) {
          let response = yield fetch('http://localhost:3000/api/todos', {
            method: 'POST',
             headers: {
@@ -12,6 +12,6 @@ export function* todoSubmittedSaga() {
          });
 
          let savedTodo = yield response.json();
-         yield effects.put(todoActions.todoSaved(savedTodo));
+         yield effects.put(actions.todoSaved(savedTodo));
     });
 }

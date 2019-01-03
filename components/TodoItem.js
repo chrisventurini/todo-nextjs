@@ -7,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { mapDispatchToTodoActions } from '../actions';
+import { mapDispatchToTodoActions } from '../actions/todos/index';
 
 
 class TodoItem extends Component {

@@ -3,9 +3,9 @@ import createSagaMiddleware from 'redux-saga';
 import fetch from 'isomorphic-unfetch';
 import rootReducer from './reducers/index';
 
-import { todoActions } from "./actions";
+import { actions } from "./actions/todos";
 import { initSagas } from './initSagas';
-
+import defaultState from './store/defaultState';
 
 let sagaMiddleware = createSagaMiddleware();
 
@@ -15,7 +15,7 @@ const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         }) : compose;
 
-let store = createStore(rootReducer, {todos: []}, composeEnhancers(applyMiddleware(sagaMiddleware)));
+let store = createStore(rootReducer, defaultState, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 initSagas(sagaMiddleware);
 
@@ -23,7 +23,7 @@ initSagas(sagaMiddleware);
 fetch('http://localhost:3000/api/todos')
     .then(async function(resp)  {
         let data = await resp.json();
-        store.dispatch(todoActions.initialLoad(data));
+        store.dispatch(actions.initialLoad(data));
     });
 
 export default store;

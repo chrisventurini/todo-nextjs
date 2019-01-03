@@ -1,12 +1,12 @@
-import { todoActionTypes } from "../actions";
+import { actionTypes } from "../actions/todos/index";
 
 export default (state = [], data) => {
     let newState;
     switch (data.type) {
-        case todoActionTypes.INITIAL_LOAD:
+        case actionTypes.INITIAL_LOAD:
             newState = data.todos ;
             break;
-        case todoActionTypes.TODO_EDITED:
+        case actionTypes.TODO_EDITED:
             newState = state.map(todo => {
                 if(todo.id === data.todo.id)
                     return data.todo;
@@ -14,7 +14,7 @@ export default (state = [], data) => {
                 return todo;
             });
             break;
-        case todoActionTypes.TODO_SAVED:
+        case actionTypes.TODO_SAVED:
             newState = state.slice(0);
             newState.push(data.todo);
             break;
