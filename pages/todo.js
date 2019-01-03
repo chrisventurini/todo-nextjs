@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+
 import EditHeader from '../components/EditHeader'
 import Todo from '../components/Todo';
 

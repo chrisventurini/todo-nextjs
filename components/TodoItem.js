@@ -7,12 +7,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { todoEdited } from "../actions";
+import { mapDispatchToTodoActions } from '../actions';
 
 
 class TodoItem extends Component {
 
     constructor(props) {
+
         super(props);
 
         this.onChange = this.onChange.bind(this);
@@ -22,9 +23,8 @@ class TodoItem extends Component {
         let todo = {
             ...this.props.todo
         };
-
         todo.completed = event.target.checked;
-        this.props.dispatch(todoEdited(todo))
+        this.props.actions.todoEdited(todo);
     }
 
     render() {
@@ -43,10 +43,9 @@ class TodoItem extends Component {
     }
 }
 
-export default connect((state, ownProps) => {
+const mapState = (state, ownProps) => {
     let todo = state.todos.find(todo => todo.id === ownProps.id);
+    return { todo };
+};
 
-    return {
-        todo
-    };
-})(TodoItem);
+export default connect(mapState, mapDispatchToTodoActions)(TodoItem);

@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
 
-import { todoEdited } from '../actions';
+import { mapDispatchToTodoActions } from '../actions';
 
 class Todo extends Component {
 
@@ -42,7 +42,7 @@ class Todo extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        this.props.dispatch(todoEdited({...this.state}));
+        this.props.actions.todoEdited({...this.state});
 
         Router.push('/');
     }
@@ -99,13 +99,15 @@ class Todo extends Component {
             </form>
         )
     }
-
 }
 
-export default connect((state, ownProps) => {
+
+const mapState = (state, ownProps) => {
     let todo = state.todos.find(todo => todo.id === ownProps.todoId);
 
     return {
         todo
     };
-})(Todo);
+};
+
+export default connect(mapState, mapDispatchToTodoActions)(Todo);

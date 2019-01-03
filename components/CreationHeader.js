@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-import { todoSubmitted } from '../actions/todoSubmitted';
+import { mapDispatchToTodoActions } from '../actions';
 
 const styles = theme => ({
     form: {
@@ -65,9 +65,9 @@ class CreationHeader extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.dispatch(todoSubmitted({
+        this.props.actions.todoSubmitted({
             ...this.state
-        }));
+        });
 
         this.setState({
            title: '',
@@ -111,4 +111,6 @@ class CreationHeader extends Component {
 
 }
 
-export default withStyles(styles)(connect()(CreationHeader));
+const mapState = state => state;
+
+export default withStyles(styles)(connect(mapState, mapDispatchToTodoActions)(CreationHeader));
