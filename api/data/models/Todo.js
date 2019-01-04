@@ -6,8 +6,9 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: DataTypes.UUIDV4
         },
         completed: DataTypes.BOOLEAN,
-        title: DataTypes.STRING,
+        dueDate: DataTypes.DATE,
         notes: DataTypes.STRING,
+        title: DataTypes.STRING
     });
 
     return Todo;

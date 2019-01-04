@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import EditHeader from '../components/EditHeader'
 import Todo from '../components/Todo';
 
-import '../styles.scss';
 
 class TodoPage extends Component {
 

@@ -28,10 +28,14 @@ class TodoItem extends Component {
     }
 
     render() {
-        let { dueDate, id, title, completed } = this.props.todo;
+        let todoItemClass = "todo-item",
+            { dueDate, id, title, completed } = this.props.todo;
+
+        if(completed)
+            todoItemClass += ' completed';
 
         return (
-            <ListItem className="todo-item" >
+            <ListItem className={todoItemClass}>
                 <Checkbox checked={completed} onChange={this.onChange} tabIndex={-1} disableRipple />
                 <Link prefetch href={"/todo?id=" + id} >
                     <a>

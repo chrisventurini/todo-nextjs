@@ -38,7 +38,7 @@ class CreationHeader extends Component {
 
     state = {
         todoTitle: '',
-        todoDate: new Date()
+        dueDate: new Date()
     };
 
     constructor(props) {
