@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import moment from 'moment';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -11,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-import { mapDispatchToTodoActions } from '../actions/todos/index';
 
 const styles = theme => ({
     form: {
@@ -34,88 +31,45 @@ const styles = theme => ({
     }
 });
 
-class CreationHeader extends Component {
+const CreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
 
-    state = {
-        todoTitle: '',
-        dueDate: new Date()
-    };
+    let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
-    constructor(props) {
-        super(props);
+    return (
+        <AppBar id="header">
+            <Toolbar>
+                <Typography variant="h6" color="inherit">
+                    <form noValidate autoComplete="off" onSubmit={onSubmit}>
+                        <InputBase
+                            id="to-do-input"
+                            className={classes.toDoInput}
+                            placeholder="Title"
+                            name="title"
+                            value={todo.title}
+                            variant="outlined"
+                            onChange={onInputChange}
+                        />
+                        <TextField
+                            id="due-date"
+                            className={classes.dateInput}
+                            label="Due Date"
+                            name="dueDate"
+                            value={dueDate}
+                            type="date"
+                            onChange={onInputChange}
+                        />
+                        <Button
+                            disabled={todo.title ? false : true}
+                            type='submit'
+                            className={classes.button}>
+                            Create Todo
+                        </Button>
+                    </form>
+                </Typography>
+            </Toolbar>
+        </AppBar>
+    )
+};
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
+export default withStyles(styles)(CreationHeader);
 
-    handleInputChange(event) {
-        let target = event.target;
-        let value = target.value;
-        let name = target.name;
-
-        if (target.type === 'date') {
-            value = moment(value).format('YYYY-MM-DD');
-        }
-
-        this.setState({
-            ...this.state,
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        this.props.actions.todoSubmitted({
-            ...this.state
-        });
-
-        this.setState({
-           title: '',
-           dueDate: new Date()
-        });
-    }
-
-    render() {
-        let { classes } = this.props;
-
-        return (
-            <AppBar id="header">
-                <Toolbar>
-                    <Typography variant="h6" color="inherit">
-                        <form className={classes.form} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                            <InputBase
-                                id="to-do-input"
-                                className={classes.toDoInput}
-                                placeholder="Title"
-                                name="title"
-                                value={this.state.title}
-                                variant="outlined"
-                                onChange={this.handleInputChange}
-                            />
-                            <TextField
-                                id="due-date"
-                                className={classes.dateInput}
-                                label="Due Date"
-                                name="dueDate"
-                                type="date"
-                                value={moment(this.state.dueDate).format('YYYY-MM-DD')}
-                                onChange={this.handleInputChange}
-                            />
-                            <Button
-                                disabled={this.state.title ? false : true}
-                                type='submit'
-                                className={classes.button}>
-                                Create Todo
-                            </Button>
-                        </form>
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-        )
-    }
-
-}
-
-const mapState = state => state;
-
-export default withStyles(styles)(connect(mapState, mapDispatchToTodoActions)(CreationHeader));

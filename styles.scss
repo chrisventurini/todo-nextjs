@@ -3,6 +3,7 @@ body {
 }
 
 #header {
+
     button {
         color: black;
         background-color: white;
@@ -14,8 +15,12 @@ body {
 
     }
 
-    input, label, svg {
-      color: white;
+    form {
+        flex-grow: 1;
+
+        input, label, svg {
+          color: white;
+        }
     }
 }
 
