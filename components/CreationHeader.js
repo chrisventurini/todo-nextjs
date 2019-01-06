@@ -101,7 +101,12 @@ class CreationHeader extends Component {
                                 value={moment(this.state.dueDate).format('YYYY-MM-DD')}
                                 onChange={this.handleInputChange}
                             />
-                            <Button type='submit' className={classes.button}>Create Todo</Button>
+                            <Button
+                                disabled={this.state.title ? false : true}
+                                type='submit'
+                                className={classes.button}>
+                                Create Todo
+                            </Button>
                         </form>
                     </Typography>
                 </Toolbar>

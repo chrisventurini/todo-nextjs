@@ -5,6 +5,8 @@ import List from '@material-ui/core/List';
 
 import TodoItem from './TodoItem';
 
+import todoSorter from '../services/todoSorter';
+
 class TodoList extends Component {
 
     render () {
@@ -21,12 +23,16 @@ class TodoList extends Component {
 
 }
 
-export default connect(state => {
+const mapState = state => {
     let todos = state.todos;
 
     if(state.filters && state.filters.completed) {
         todos = todos.filter(todo => !todo.completed);
     }
 
+    todos = todoSorter(todos);
+
     return { todos }
-})(TodoList)
+};
+
+export default connect(mapState)(TodoList);

@@ -1,5 +1,7 @@
-const express = require('express');
-const todoRepository = require('./data/todoRepository');
+const express = require('express'),
+
+    todoRepository = require('./data/todoRepository'),
+    todoSorter = require('../services/todoSorter');
 
 module.exports = function (app) {
     let todoRouter = express.Router();
@@ -7,9 +9,7 @@ module.exports = function (app) {
         .get(async function(req, res) {
             let data = await todoRepository.getAll();
 
-            data = data.sort((a, b) => a.dueDate - b.dueDate);
-
-            res.send(data);
+            res.send(todoSorter(data));
         })
         .post(async function(req, res) {
             let todo = await todoRepository.save(req.body);
