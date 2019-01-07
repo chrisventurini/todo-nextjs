@@ -18,7 +18,7 @@ const styles = theme => ({
         color: 'white',
         marginLeft: '20px'
     },
-    toDoInput: {
+    todoInput: {
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -42,7 +42,7 @@ const CreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
                     <form noValidate autoComplete="off" onSubmit={onSubmit}>
                         <InputBase
                             id="to-do-input"
-                            className={classes.toDoInput}
+                            className={classes.todoInput}
                             placeholder="Title"
                             name="title"
                             value={todo.title}

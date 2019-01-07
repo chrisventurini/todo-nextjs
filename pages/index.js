@@ -1,13 +1,12 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
-import CreationHeader from '../components/CreationHeader';
-import FilterHeader from '../components/FilterHeader';
-import TodoList from '../components/TodoList';
+import CreationHeader from '../components/todo/CreationHeader';
+import FilterHeader from '../components/filter/FilterHeader';
+import TodoList from '../components/todo/TodoList';
 
-import { mapDispatchToTodoActions } from '../actions/todos/index';
-
-import '../styles.scss';
+import { mapDispatchToTodoActions } from '../store/actions/todos/index';
 
 class Index extends Component {
 

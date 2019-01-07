@@ -1,5 +1,8 @@
-import { actionTypes } from '../actions/filtering';
-import defaultState from '../store/defaultState';
+
+
+import { actionTypes } from '../actions/filtering/index';
+import defaultState from '../defaultState';
+
 
 export default (state = defaultState.filters, data) => {
     let newState;

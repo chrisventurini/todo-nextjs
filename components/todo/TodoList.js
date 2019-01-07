@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
+import todoSorter from '../../services/todoSorter';
+
 import List from '@material-ui/core/List';
 
-import TodoItem from './TodoItem';
+import TodoListItem from './TodoListItem';
 
-import todoSorter from '../services/todoSorter';
 
 class TodoList extends Component {
 
     render () {
         let todos = this.props.todos.map((todo) => {
-           return (<TodoItem key={todo.id} id={todo.id} todo={ todo } />)
+           return (<TodoListItem key={todo.id} id={todo.id} todo={ todo } />)
         });
 
         return (

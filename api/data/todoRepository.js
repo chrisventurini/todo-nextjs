@@ -1,6 +1,13 @@
 const db = require('./models');
 
 let todoRepository = {
+    get: async function(id) {
+        return await db.Todo.findOne({
+            where: {
+                id: id
+            }
+        });
+    },
     getAll: async function() {
         return await db.Todo.findAll()
     },

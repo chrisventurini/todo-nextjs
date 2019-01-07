@@ -5,10 +5,18 @@ const express = require('express'),
 
 module.exports = function (app) {
     let todoRouter = express.Router();
+
+    todoRouter.route('/todos/:id')
+        .get(async function (req, res) {
+            let id = req.params.id,
+                todo = await todoRepository.get(id);
+
+            res.send(todo);
+        });
+
     todoRouter.route('/todos')
         .get(async function(req, res) {
             let data = await todoRepository.getAll();
-
             res.send(todoSorter(data));
         })
         .post(async function(req, res) {

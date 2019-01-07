@@ -24,19 +24,6 @@ body {
     }
 }
 
-#filter-header {
-    background-color: lightgrey;
-    margin-top: 64px;
-    height: 45px;
-    width: 100%;
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-
-    > div {
-      margin-top: 7px;
-      margin-left: 25px;
-    }
-}
-
 #todo-edit {
     padding: 10px 25px;
 
@@ -77,13 +64,3 @@ body {
     }
 }
 
-.todo-item {
-
-    &:not(:first-child) {
-        border-top: black 1px solid;
-    }
-
-    &.completed {
-        opacity: 0.6;
-    }
-}

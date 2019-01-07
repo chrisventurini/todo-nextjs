@@ -2,18 +2,29 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import Router from 'next/router';
 
-import EditHeader from '../components/EditHeader'
-import Todo from '../components/Todo';
+import EditHeader from '../components/common/BasicNavHeader'
+import TodoForm from '../components/todo/TodoForm';
 
-import { mapDispatchToTodoActions } from '../actions/todos/index';
+import { mapDispatchToTodoActions } from '../store/actions/todos/index';
+
 
 class TodoPage extends Component {
+
+    state = {
+        completed: false,
+        dueDate: new Date(),
+        notes: '',
+        title: ''
+    };
 
     constructor(props) {
         super(props);
 
-        this.state = props.todo;
-        this.state.notes = this.state.notes || '';
+
+        if(props.todo) {
+            this.state = props.todo;
+            this.state.notes = props.todo.notes || '';
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -21,17 +32,13 @@ class TodoPage extends Component {
 
     static async getInitialProps (context) {
         let { id } = context.query;
-
-        return {
-            todoId: id
-        }
+        return { todoId: id }
     }
 
-
     handleInputChange(event) {
-        let target = event.target;
-        let value = target.type === 'checkbox' ? target.checked : target.value;
-        let name = target.name;
+        let target = event.target,
+            value = target.type === 'checkbox' ? target.checked : target.value,
+            name = target.name;
 
         if (event.type === 'date') {
             value = moment(value).format('YYYY-MM-DD');
@@ -55,7 +62,7 @@ class TodoPage extends Component {
         return (
             <div id="edit-page">
                 <EditHeader />
-                <Todo todo={this.state} onSubmit={this.handleSubmit} onInputChange={this.handleInputChange}/>
+                <TodoForm todo={this.state} onSubmit={this.handleSubmit} onInputChange={this.handleInputChange}/>
             </div>
         )
     }
