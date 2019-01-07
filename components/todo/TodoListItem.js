@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Link from 'next/link';
 import moment from 'moment';
 
@@ -8,10 +6,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import { mapDispatchToTodoActions } from '../../store/actions/todos/index';
-
 
 const todoItemStyle = {
+    paddingBottom: '0',
+    paddingTop: '0',
+
+    '&:hover': {
+        backgroundColor: '#E8DDB5'
+    },
+
+    '& a': {
+        padding: '11px 0px',
+        textDecoration: 'none',
+        width: '100%'
+    },
+
     '&:not(:first-child)': {
         borderTop: 'black 1px solid'
     }
@@ -25,47 +34,22 @@ const styles = {
     }
 };
 
-class TodoListItem extends Component {
+const TodoListItem = ({classes, todo, onChange}) => {
 
-    constructor(props) {
-        super(props);
+    let  dueDate = moment(todo.dueDate).format('MM/DD/YYYY');
 
-        this.onChange = this.onChange.bind(this);
-    }
-
-    onChange(event) {
-        let todo = {
-            ...this.props.todo
-        };
-        todo.completed = event.target.checked;
-
-        this.props.actions.todoEdited(todo);
-    }
-
-    render() {
-        let { classes, todo } = this.props,
-
-            dueDate = moment(todo.dueDate).format('MM/DD/YYYY');
-
-        return (
-            <ListItem className={todo.completed ? classes.completedTodoItem : classes.todoItem}>
-                <Checkbox checked={todo.completed} onChange={this.onChange} tabIndex={-1} disableRipple />
-                <Link prefetch href={{ pathname: "/todo", query:{ id: todo.id } }}>
-                    <a>
-                        <ListItemText primary={todo.title} secondary={`Due: ${ dueDate }`} />
-                    </a>
-                </Link>
-            </ListItem>
-        )
-    }
-}
-
-const mapState = (state, ownProps) => {
-    let todo = state.todos.find(todo => todo.id === ownProps.id);
-    return { todo };
+    return (
+        <ListItem className={todo.completed ? classes.completedTodoItem : classes.todoItem}>
+            <Checkbox checked={todo.completed} onChange={onChange} tabIndex={-1} disableRipple />
+            <Link prefetch href={{ pathname: "/todo", query:{ id: todo.id } }}>
+                <a>
+                    <ListItemText primary={todo.title} secondary={`Due: ${ dueDate }`} />
+                </a>
+            </Link>
+        </ListItem>
+    )
 };
 
-TodoListItem = connect(mapState, mapDispatchToTodoActions)(TodoListItem);
-TodoListItem = withStyles(styles)(TodoListItem);
 
-export default TodoListItem;
+export default withStyles(styles)(TodoListItem);
+

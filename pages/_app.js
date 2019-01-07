@@ -11,7 +11,7 @@ import store from '../store';
 
 const CONTEXT_SYMBOL_KEY = Symbol.for('PAGE_CONTEXT');
 
-import '../styles.scss';
+import '../global.scss';
 
 class ToDoApp extends App {
 

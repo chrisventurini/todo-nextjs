@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import todoSorter from '../../services/todoSorter';
 
 import List from '@material-ui/core/List';
+import withStyles from "@material-ui/core/styles/withStyles";
 
-import TodoListItem from './TodoListItem';
+import TodoListItemContainer from './TodoListItemContainer';
 
-
-class TodoList extends Component {
-
-    render () {
-        let todos = this.props.todos.map((todo) => {
-           return (<TodoListItem key={todo.id} id={todo.id} todo={ todo } />)
-        });
-
-        return (
-            <List id="todo-list">
-                {todos}
-            </List>
-        )
+const styles = {
+    todoList: {
+        paddingTop: '0'
     }
+};
 
-}
+let TodoList = ({classes, todos}) => {
+
+    let todosItems = todos.map((todo) => {
+       return (<TodoListItemContainer key={todo.id} id={todo.id} todo={ todo } />)
+    });
+
+    return (
+        <List className={classes.todoList} >
+            {todosItems}
+        </List>
+    )
+};
 
 const mapState = state => {
     let todos = state.todos;
@@ -36,4 +38,7 @@ const mapState = state => {
     return { todos }
 };
 
-export default connect(mapState)(TodoList);
+TodoList = connect(mapState)(TodoList);
+TodoList = withStyles(styles)(TodoList);
+
+export default TodoList;

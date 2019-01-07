@@ -9,7 +9,7 @@ import { mapDispatchToFilterActions } from '../../store/actions/filtering/index'
 
 const styles = {
     filterHeader: {
-        backgroundColor: 'lightgrey',
+        backgroundColor: '#95B8D1',
         marginTop: '64px',
         height: '45px',
         width: '100%',

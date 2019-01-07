@@ -5,11 +5,22 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { KeyboardArrowLeft } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 
+import { withStyles } from '@material-ui/core/styles';
 
-export default () => {
+const styles = {
+    header: {
+        color: 'white',
+
+        '& *': {
+            color: 'white'
+        }
+    }
+};
+
+const BasicNavHeader = ({ classes }) => {
 
     return (
-        <AppBar id="header">
+        <AppBar className={classes.header}>
             <Toolbar>
                 <Link>
                     <a href="/">
@@ -20,4 +31,6 @@ export default () => {
             </Toolbar>
         </AppBar>
     );
-}
+};
+
+export default withStyles(styles)(BasicNavHeader);

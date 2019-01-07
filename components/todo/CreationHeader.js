@@ -11,14 +11,30 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 
 
 const styles = theme => ({
+    button: {
+        color: 'black',
+        backgroundColor: 'white',
+        marginLeft: '20px',
+
+        '&:disabled': {
+            opacity: '0.6'
+        }
+    },
+
     form: {
         flexGrow: 1,
     },
+
     dateInput: {
         color: 'white',
-        marginLeft: '20px'
+        marginLeft: '20px',
+
+        '& *': {
+            color: 'white'
+        }
     },
     todoInput: {
+        color: 'white',
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
@@ -36,7 +52,7 @@ const CreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
     let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
     return (
-        <AppBar id="header">
+        <AppBar>
             <Toolbar>
                 <Typography variant="h6" color="inherit">
                     <form noValidate autoComplete="off" onSubmit={onSubmit}>
@@ -59,6 +75,7 @@ const CreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
                             onChange={onInputChange}
                         />
                         <Button
+                            className={classes.button}
                             disabled={todo.title ? false : true}
                             type='submit'
                             className={classes.button}>

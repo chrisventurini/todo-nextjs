@@ -5,14 +5,41 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import TextField from '@material-ui/core/TextField';
+import withStyles from "@material-ui/core/styles/withStyles";
 
+const styles = {
+    todoEdit: {
+        marginTop: '55px',
+        padding: '10px 25px',
 
-export default ({todo, onInputChange, onSubmit}) => {
+        '& > div': {
+            paddingBottom: '10px',
+            width: '100%'
+        }
+    },
+
+    todoEditCheck: {
+        paddingBottom: '10px',
+        paddingLeft: '5px',
+        width: '100%'
+    },
+
+    todoEditControls: {
+        marginTop: '10px',
+        width: '100%',
+
+        '& button': {
+            margin: '0 10px'
+        }
+    }
+};
+
+const TodoForm = ({todo, classes, onInputChange, onSubmit}) => {
 
     let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
     return (
-        <form id="todo-edit" onSubmit={onSubmit}>
+        <form className={classes.todoEdit} onSubmit={onSubmit}>
             <TextField
                 label="Title"
                 name="title"
@@ -21,7 +48,7 @@ export default ({todo, onInputChange, onSubmit}) => {
                 value={todo.title}
             />
             <FormControlLabel
-                id="todo-edit-check"
+                className={classes.todoEditCheck}
                 control={
                     <Checkbox
                         name="completed"
@@ -47,7 +74,7 @@ export default ({todo, onInputChange, onSubmit}) => {
                 onChange={onInputChange}
                 value={todo.notes}
             />
-            <div id="todo-edit-controls">
+            <div className={classes.todoEditControls}>
                 <Button type="submit" variant="contained" color="primary">
                    Save
                 </Button>
@@ -59,5 +86,7 @@ export default ({todo, onInputChange, onSubmit}) => {
             </div>
         </form>
     )
-}
+};
+
+export default withStyles(styles)(TodoForm);
 
