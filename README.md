@@ -10,7 +10,6 @@ This is the second part of my efforts. I have already gone through the [Next.js 
 As part of the commit...ment (pun intended) to the challenge, I am making all my code publicly accessible via GitHub and posting my progress on:
 
 * [Twitter](https://twitter.com/ChrisMVenturini)
-* [Instagram](https://www.instagram.com/chrismventurini/)
 
 This is my code as I progress through the [Next.js tutorials](https://nextjs.org/learn/).
 
