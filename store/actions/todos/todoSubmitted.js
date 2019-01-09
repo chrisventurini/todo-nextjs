@@ -1,4 +1,6 @@
-export const TODO_SUBMITTED = 'TODO_SUBMITTED';
+import consts from '../../../consts';
+
+export const TODO_SUBMITTED = `${consts.ASYNC_STARTED}_TODO_SUBMITTED`;
 
 export const todoSubmitted = (todo) => {
     return {

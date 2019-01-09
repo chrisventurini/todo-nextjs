@@ -2,5 +2,6 @@ export default {
     filters: {
         completed: true
     },
-    todos: []
+    todos: [],
+    asyncCallsInProgress: 0
 }
