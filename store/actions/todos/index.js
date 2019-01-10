@@ -1,22 +1,25 @@
 import { bindActionCreators } from 'redux';
 
-import { INITIAL_LOAD, initialLoad } from './initialLoad'
-import { TODO_EDITED, todoEdited } from './todoEdited'
-import { TODO_SAVED, todoSaved } from './todoSaved'
-import { TODO_SUBMITTED, todoSubmitted } from './todoSubmitted'
+import { TODO_INITIAL_LOAD, todoInitialLoad } from './todoInitialLoad';
+import { TODO_SAVE, todoSave } from './todoSave';
+import { TODO_SAVE_SUCCESSFUL, todoSaveSuccessful } from './todoSaveSuccessful';
+import { TODO_UPDATE, todoUpdate } from './todoUpdate';
+import { TODO_UPDATE_SUCCESSFUL, todoUpdateSuccessful } from './todoUpdateSuccessful';
 
 export const actions = {
-  initialLoad,
-  todoEdited,
-  todoSaved,
-  todoSubmitted
+  todoInitialLoad,
+  todoUpdate,
+  todoSave,
+  todoSaveSuccessful,
+    todoUpdateSuccessful
 };
 
 export const actionTypes = {
-  INITIAL_LOAD,
-  TODO_EDITED,
-  TODO_SAVED,
-  TODO_SUBMITTED
+  TODO_INITIAL_LOAD,
+  TODO_SAVE,
+  TODO_SAVE_SUCCESSFUL,
+  TODO_UPDATE,
+    TODO_UPDATE_SUCCESSFUL,
 };
 
 export const mapDispatchToTodoActions = dispatch => {

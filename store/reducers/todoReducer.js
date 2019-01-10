@@ -3,10 +3,10 @@ import { actionTypes } from "../actions/todos/index";
 export default (state = [], data) => {
     let newState;
     switch (data.type) {
-        case actionTypes.INITIAL_LOAD:
+        case actionTypes.TODO_INITIAL_LOAD:
             newState = data.todos ;
             break;
-        case actionTypes.TODO_EDITED:
+        case actionTypes.TODO_UPDATE:
             newState = state.map(todo => {
                 if(todo.id === data.todo.id)
                     return data.todo;

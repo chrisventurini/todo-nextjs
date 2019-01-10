@@ -4,6 +4,7 @@ import moment from 'moment';
 
 import CreationHeader from '../components/todo/CreationHeader';
 import FilterHeader from '../components/filter/FilterHeader';
+import Loader from '../components/async/Loader';
 import TodoList from '../components/todo/TodoList';
 
 import { mapDispatchToTodoActions } from '../store/actions/todos/index';
@@ -54,6 +55,7 @@ class Index extends Component {
             <div>
                 <CreationHeader todo={this.state} onInputChange={this.handleInputChange} onSubmit={this.handleSubmit}/>
                 <FilterHeader />
+                <Loader />
                 <TodoList />
             </div>
         )

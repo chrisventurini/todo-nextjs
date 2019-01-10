@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Router from 'next/router';
 
 import EditHeader from '../components/common/BasicNavHeader'
+import Loader from '../components/async/Loader'
 import TodoForm from '../components/todo/TodoForm';
 
 import { mapDispatchToTodoActions } from '../store/actions/todos/index';
@@ -53,7 +54,7 @@ class TodoPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        this.props.actions.todoEdited({...this.state});
+        this.props.actions.todoUpdate({...this.state});
 
         Router.push('/');
     }
@@ -62,6 +63,7 @@ class TodoPage extends Component {
         return (
             <div id="edit-page">
                 <EditHeader />
+                <Loader />
                 <TodoForm todo={this.state} onSubmit={this.handleSubmit} onInputChange={this.handleInputChange}/>
             </div>
         )

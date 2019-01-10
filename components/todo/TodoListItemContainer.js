@@ -20,7 +20,7 @@ class TodoListItemContainer extends Component {
         };
         todo.completed = event.target.checked;
 
-        this.props.actions.todoEdited(todo);
+        this.props.actions.todoUpdate(todo);
     }
 
     render() {

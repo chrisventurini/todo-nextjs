@@ -15,7 +15,7 @@ const composeEnhancers =
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
         }) : compose;
 
-let index = createStore(rootReducer, defaultState, composeEnhancers(applyMiddleware(sagaMiddleware)));
+let store = createStore(rootReducer, defaultState, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 initSagas(sagaMiddleware);
 
@@ -23,7 +23,7 @@ initSagas(sagaMiddleware);
 fetch('http://localhost:3000/api/todos')
     .then(async function(resp)  {
         let data = await resp.json();
-        index.dispatch(actions.initialLoad(data));
+        store.dispatch(actions.todoInitialLoad(data));
     });
 
-export default index;
+export default store;
