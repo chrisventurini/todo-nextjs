@@ -12,6 +12,13 @@ module.exports = function (app) {
                 todo = await todoRepository.get(id);
 
             res.send(todo);
+        })
+        .delete(async function (req, res) {
+            let id = req.params.id;
+
+            await todoRepository.delete(id);
+
+            res.send('Success');
         });
 
     todoRouter.route('/todos')
@@ -21,7 +28,7 @@ module.exports = function (app) {
         })
         .post(async function(req, res) {
             let todo = await todoRepository.save(req.body);
-            res.send(todo);
+            res.status(201).send(todo);
         })
         .patch(async function(req, res) {
             let todo = await todoRepository.update(req.body);

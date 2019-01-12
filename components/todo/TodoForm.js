@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import Button from '@material-ui/core/Button';
@@ -34,7 +35,7 @@ const styles = {
     }
 };
 
-const TodoForm = ({todo, classes, onInputChange, onSubmit}) => {
+const TodoForm = ({todo, classes, onDelete, onInputChange, onSubmit}) => {
 
     let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
@@ -76,7 +77,10 @@ const TodoForm = ({todo, classes, onInputChange, onSubmit}) => {
             />
             <div className={classes.todoEditControls}>
                 <Button type="submit" variant="contained" color="primary">
-                   Save
+                    Save
+                </Button>
+                <Button onClick={onDelete} variant="contained" color="secondary">
+                    X Delete
                 </Button>
                 <Link href="/">
                     <Button variant="contained" color="secondary">
@@ -86,6 +90,10 @@ const TodoForm = ({todo, classes, onInputChange, onSubmit}) => {
             </div>
         </form>
     )
+};
+
+TodoForm.propTypes = {
+    onDelete: PropTypes.func.required
 };
 
 export default withStyles(styles)(TodoForm);

@@ -11,7 +11,7 @@ class PageDocument extends Document {
         const page = context.renderPage(Component => {
             const WrappedComponent = props => {
                 pageContext = props.pageContext;
-                return <Component {...props} />;
+                return (<Component {...props} />);
             };
 
             return WrappedComponent;

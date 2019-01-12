@@ -1,6 +1,15 @@
 const db = require('./models');
 
 let todoRepository = {
+
+    delete: async function(id) {
+        await db.Todo.destroy({
+            where: {
+                id: id
+            }
+       });
+    },
+
     get: async function(id) {
         return await db.Todo.findOne({
             where: {
@@ -8,9 +17,11 @@ let todoRepository = {
             }
         });
     },
+
     getAll: async function() {
         return await db.Todo.findAll()
     },
+
     save: async function(todo) {
         let todoModel = db.Todo.build(todo);
 

@@ -47,7 +47,7 @@ const styles = theme => ({
     }
 });
 
-const CreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
+const TodoCreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
 
     let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
@@ -88,5 +88,5 @@ const CreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
     )
 };
 
-export default withStyles(styles)(CreationHeader);
+export default withStyles(styles)(TodoCreationHeader);
 
