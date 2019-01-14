@@ -17,7 +17,7 @@ export default (state = [], data) => {
                 return todo;
             });
             break;
-        case actionTypes.TODO_SAVE:
+        case actionTypes.TODO_SAVE_SUCCESSFUL:
             newState = state.slice(0);
             newState.push(data.todo);
             break;

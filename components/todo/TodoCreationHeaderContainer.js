@@ -9,7 +9,7 @@ import { mapDispatchToTodoActions } from '../../store/actions/todos/index';
 class TodoCreationHeaderContainer extends Component {
 
     state = {
-        todoTitle: '',
+        title: '',
         dueDate: new Date()
     };
 
