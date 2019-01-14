@@ -5,7 +5,7 @@ import filterReducer from './filtersReducer';
 import todoReducer from './todoReducer';
 
 export default combineReducers({
-    asyncCallsInProgress: asyncReducer,
+    asyncCalls: asyncReducer,
     filters: filterReducer,
     todos: todoReducer
 });

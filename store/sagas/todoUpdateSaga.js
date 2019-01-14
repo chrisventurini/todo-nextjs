@@ -12,7 +12,8 @@ export default function* todoUpdateSaga() {
            body:JSON.stringify(todo)
         });
 
-        if(response.ok)
+        if(response.ok) {
             yield effects.put(actions.todoUpdateSuccessful(todo));
+        }
     });
 }

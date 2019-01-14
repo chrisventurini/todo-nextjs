@@ -4,7 +4,7 @@ import * as effects from 'redux-saga/effects';
 
 import { actions } from "../actions/routing";
 
-export default function* routingSaga() {
+export default function* routingChangeSaga() {
     let channel = new eventChannel(emit => {
         Router.events.on('routeChangeStart', () => {
             emit(actions.routeChangeStarted)

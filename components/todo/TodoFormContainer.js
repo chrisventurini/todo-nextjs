@@ -35,16 +35,10 @@ class TodoFormContainer extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    _navToHome() {
-        Router.push('/');
-    }
-
     handleDelete(event) {
         event.preventDefault();
 
-        this.props.actions.todoDelete(this.props.todo);
-
-        this._navToHome();
+        this.props.actions.todoDelete(this.state);
     }
 
     handleInputChange(event) {
@@ -68,13 +62,17 @@ class TodoFormContainer extends Component {
         event.preventDefault();
 
         this.props.actions.todoUpdate({...this.state});
-
-        this._navToHome();
     }
 
     render () {
         return (
-            <TodoForm todo={this.state} onDelete={this.handleDelete} onSubmit={this.handleSubmit} onInputChange={this.handleInputChange}/>
+            <TodoForm
+                asyncCallsInProgress={this.props.asyncCalls.inProgress}
+                todo={this.state}
+                onDelete={this.handleDelete}
+                onSubmit={this.handleSubmit}
+                onInputChange={this.handleInputChange}
+            />
         )
     }
 
@@ -84,6 +82,7 @@ const mapState = (state, ownProps) => {
     let todo = state.todos.find(todo => todo.id === ownProps.todoId);
 
     return {
+        asyncCalls: state.asyncCalls,
         todo
     };
 };

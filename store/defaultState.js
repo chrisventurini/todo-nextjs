@@ -3,5 +3,8 @@ export default {
         completed: true
     },
     todos: [],
-    asyncCallsInProgress: 0
+    asyncCalls: {
+        inProgress: false,
+        num: 0
+    }
 }

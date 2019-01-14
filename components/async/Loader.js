@@ -11,8 +11,8 @@ const styles = {
     }
 };
 
-let Loader = ({ asyncCallsInProgress, classes }) => {
-    let loader = (asyncCallsInProgress > 0) ? (<LinearProgress />) : (<Fragment />);
+let Loader = ({ asyncCalls, classes }) => {
+    let loader = (asyncCalls.inProgress) ? (<LinearProgress />) : (<Fragment />);
 
     return (
         <div className={classes.loaderContainer}>
@@ -22,7 +22,7 @@ let Loader = ({ asyncCallsInProgress, classes }) => {
 };
 
 const mapState = state => {
-    return { asyncCallsInProgress: state.asyncCallsInProgress }
+    return { asyncCalls: state.asyncCalls}
 };
 
 Loader = connect(mapState)(Loader);
