@@ -1,5 +1,7 @@
 import { bindActionCreators } from 'redux';
 
+import { TODO_COMPLETE, todoComplete } from './todoComplete';
+import { TODO_COMPLETE_SUCCESSFUL, todoCompleteSuccessful } from './todoCompleteSuccessful';
 import { TODO_INITIAL_LOAD, todoInitialLoad } from './todoInitialLoad';
 import { TODO_DELETE, todoDelete } from './todoDelete';
 import { TODO_DELETE_SUCCESSFUL, todoDeleteSuccessful } from './todoDeleteSuccessful';
@@ -9,6 +11,8 @@ import { TODO_UPDATE, todoUpdate } from './todoUpdate';
 import { TODO_UPDATE_SUCCESSFUL, todoUpdateSuccessful } from './todoUpdateSuccessful';
 
 export const actions = {
+    todoComplete,
+    todoCompleteSuccessful,
     todoDelete,
     todoDeleteSuccessful,
     todoInitialLoad,
@@ -19,6 +23,8 @@ export const actions = {
 };
 
 export const actionTypes = {
+    TODO_COMPLETE,
+    TODO_COMPLETE_SUCCESSFUL,
     TODO_DELETE,
     TODO_DELETE_SUCCESSFUL,
     TODO_INITIAL_LOAD,

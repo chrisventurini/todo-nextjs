@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Proptypes from 'prop-types';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -20,7 +21,13 @@ const styles = theme => ({
             opacity: '0.6'
         }
     },
+    fieldSet: {
+        all: 'unset',
 
+        '&:disabled *': {
+            opacity: '0.6'
+        }
+    },
     form: {
         flexGrow: 1,
     },
@@ -47,7 +54,7 @@ const styles = theme => ({
     }
 });
 
-const TodoCreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
+const TodoCreationHeader = ({asyncCallsInProgress, todo, classes, onSubmit, onInputChange}) => {
 
     let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
@@ -56,36 +63,42 @@ const TodoCreationHeader = ({todo, classes, onSubmit, onInputChange}) => {
             <Toolbar>
                 <Typography variant="h6" color="inherit">
                     <form noValidate autoComplete="off" onSubmit={onSubmit}>
-                        <InputBase
-                            id="to-do-input"
-                            className={classes.todoInput}
-                            placeholder="Title"
-                            name="title"
-                            value={todo.title}
-                            variant="outlined"
-                            onChange={onInputChange}
-                        />
-                        <TextField
-                            id="due-date"
-                            className={classes.dateInput}
-                            label="Due Date"
-                            name="dueDate"
-                            value={dueDate}
-                            type="date"
-                            onChange={onInputChange}
-                        />
-                        <Button
-                            className={classes.button}
-                            disabled={todo.title ? false : true}
-                            type='submit'
-                            className={classes.button}>
-                            Create Todo
-                        </Button>
+                        <fieldset className={classes.fieldSet} disabled={asyncCallsInProgress}>
+                            <InputBase
+                                id="to-do-input"
+                                className={classes.todoInput}
+                                placeholder="Title"
+                                name="title"
+                                value={todo.title}
+                                variant="outlined"
+                                onChange={onInputChange}
+                            />
+                            <TextField
+                                id="due-date"
+                                className={classes.dateInput}
+                                label="Due Date"
+                                name="dueDate"
+                                value={dueDate}
+                                type="date"
+                                onChange={onInputChange}
+                            />
+                            <Button
+                                className={classes.button}
+                                disabled={todo.title ? false : true}
+                                type='submit'
+                                className={classes.button}>
+                                Create Todo
+                            </Button>
+                        </fieldset>
                     </form>
                 </Typography>
             </Toolbar>
         </AppBar>
     )
+};
+
+TodoCreationHeader.propTypes = {
+    asyncCallsInProgress: Proptypes.bool.required
 };
 
 export default withStyles(styles)(TodoCreationHeader);

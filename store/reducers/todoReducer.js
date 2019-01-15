@@ -9,7 +9,8 @@ export default (state = [], data) => {
         case actionTypes.TODO_INITIAL_LOAD:
             newState = data.todos ;
             break;
-        case actionTypes.TODO_UPDATE:
+        case actionTypes.TODO_COMPLETE_SUCCESSFUL:
+        case actionTypes.TODO_UPDATE_SUCCESSFUL:
             newState = state.map(todo => {
                 if(todo.id === data.todo.id)
                     return data.todo;

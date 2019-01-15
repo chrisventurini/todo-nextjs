@@ -49,11 +49,18 @@ class TodoCreationHeaderContainer extends Component {
 
     render() {
         return (
-            <TodoCreationHeader todo={this.state} onInputChange={this.handleInputChange} onSubmit={this.handleSubmit}/>
+            <TodoCreationHeader
+                asyncCallsInProgress={this.props.asyncCalls.inProgress}
+                todo={this.state}
+                onInputChange={this.handleInputChange}
+                onSubmit={this.handleSubmit}
+            />
         )
     }
 }
 
-const mapState = state => state;
+const mapState = state => {
+    return { asyncCalls: state.asyncCalls }
+};
 
 export default connect(mapState, mapDispatchToTodoActions)(TodoCreationHeaderContainer)

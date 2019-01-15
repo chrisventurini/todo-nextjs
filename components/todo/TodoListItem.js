@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
@@ -34,13 +35,24 @@ const styles = {
     }
 };
 
-const TodoListItem = ({classes, todo, onChange}) => {
+const TodoListItem = ({asyncCallsInProgress, classes, onCheckClicked, todo}) => {
 
-    let  dueDate = moment(todo.dueDate).format('MM/DD/YYYY');
+    let  dueDate = moment(todo.dueDate).format('MM/DD/YYYY'),
+         itemClass = classes.todoItem;
+
+    if(todo.completed || asyncCallsInProgress) {
+        itemClass = classes.completedTodoItem;
+    }
 
     return (
-        <ListItem className={todo.completed ? classes.completedTodoItem : classes.todoItem}>
-            <Checkbox checked={todo.completed} onChange={onChange} tabIndex={-1} disableRipple />
+        <ListItem className={itemClass}>
+            <Checkbox
+                disabled={asyncCallsInProgress}
+                checked={todo.completed}
+                onChange={onCheckClicked}
+                tabIndex={-1}
+                disableRipple
+            />
             <Link prefetch href={{ pathname: "/todo", query:{ id: todo.id } }}>
                 <a>
                     <ListItemText primary={todo.title} secondary={`Due: ${ dueDate }`} />
@@ -50,6 +62,12 @@ const TodoListItem = ({classes, todo, onChange}) => {
     )
 };
 
+TodoListItem.propTypes = {
+    asyncCallsInProgress: PropTypes.bool.required,
+    classes: PropTypes.object.required,
+    onCheckClicked: PropTypes.func.required,
+    todo: PropTypes.object.required
+};
 
 export default withStyles(styles)(TodoListItem);
 

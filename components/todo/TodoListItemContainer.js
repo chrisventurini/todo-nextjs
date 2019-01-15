@@ -11,28 +11,31 @@ class TodoListItemContainer extends Component {
     constructor(props) {
         super(props);
 
-        this.onChange = this.onChange.bind(this);
+        this.onCheckClicked = this.onCheckClicked.bind(this);
     }
 
-    onChange(event) {
+    onCheckClicked(event) {
         let todo = {
             ...this.props.todo
         };
         todo.completed = event.target.checked;
 
-        this.props.actions.todoUpdate(todo);
+        this.props.actions.todoComplete(todo);
     }
 
     render() {
         return (
-            <TodoListItem todo={this.props.todo} onChange={this.onChange} />
+            <TodoListItem asyncCallsInProgress={this.props.asyncCalls.inProgress} todo={this.props.todo}  onCheckClicked={this.onCheckClicked} />
         )
     }
 }
 
 const mapState = (state, ownProps) => {
     let todo = state.todos.find(todo => todo.id === ownProps.id);
-    return { todo };
+    return {
+        asyncCalls: state.asyncCalls,
+        todo
+    };
 };
 
 export default connect(mapState, mapDispatchToTodoActions)(TodoListItemContainer);
