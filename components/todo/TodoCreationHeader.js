@@ -1,5 +1,5 @@
 import moment from 'moment';
-import Proptypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -98,7 +98,7 @@ const TodoCreationHeader = ({asyncCallsInProgress, todo, classes, onSubmit, onIn
 };
 
 TodoCreationHeader.propTypes = {
-    asyncCallsInProgress: Proptypes.bool.required
+    asyncCallsInProgress: propTypes.bool.isRequired
 };
 
 export default withStyles(styles)(TodoCreationHeader);

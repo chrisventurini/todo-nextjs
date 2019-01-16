@@ -60,7 +60,7 @@ class TodoCreationHeaderContainer extends Component {
 }
 
 const mapState = state => {
-    return { asyncCalls: state.asyncCalls }
+    return { asyncCalls: state.asyncCalls };
 };
 
 export default connect(mapState, mapDispatchToTodoActions)(TodoCreationHeaderContainer)

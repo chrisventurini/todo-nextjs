@@ -1,11 +1,14 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
+import RadioButtonUnchecked from '@material-ui/icons/RadioButtonUnchecked';
+import RadioButtonChecked from '@material-ui/icons/RadioButtonChecked';
+import withStyles from "@material-ui/core/styles/withStyles";
 
-import CompletedFilterButton from './CompletedFilterButton';
-
-import { mapDispatchToFilterActions } from '../../store/actions/filtering/index';
+const completedFilterBtn = {
+    marginTop: '7px',
+    marginLeft: '25px'
+};
 
 const styles = {
     filterHeader: {
@@ -14,50 +17,45 @@ const styles = {
         height: '45px',
         width: '100%',
         boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
+    },
 
-        '& > div': {
-            marginTop: '7px',
-            marginLeft: '25px'
-        }
+    completedFilterBtn: {
+        ...completedFilterBtn
+    },
+
+    completedFilterBtnDisabled: {
+        ...completedFilterBtn,
+        opacity: 0.6
     }
 };
 
-class FilterHeader extends Component {
+const FilterHeader = ({asyncCallsInProgress, classes, completedFiltered, onCompletedClick}) => {
 
-    state = {
-        filterCompleted: true
-    };
+    let icon = completedFiltered ? (<RadioButtonChecked />) : (<RadioButtonUnchecked/>),
 
-    constructor(props) {
-        super(props);
+        completedClasses = asyncCallsInProgress ? classes.completedFilterBtnDisabled : classes.completedFilterBtn;
 
-        this.handleCompletedClicked = this.handleCompletedClicked.bind(this);
-    }
+    return (
+        <div className={classes.filterHeader} >
+            <Chip
+                className={completedClasses}
+                disabled={asyncCallsInProgress}
+                icon={icon}
+                label="Filter Completed"
+                clickable={!asyncCallsInProgress}
+                onClick={onCompletedClick}
+                color="primary"
+            />
+        </div>
+    )
+};
 
-    handleCompletedClicked() {
-        this.props.actions.toggleFilterCompleted();
-        this.setState({
-            filterCompleted: !this.state.filterCompleted
-        });
-    }
+FilterHeader.propTypes = {
+    asyncCallsInProgress: propTypes.bool.isRequired,
+    classes: propTypes.object.isRequired,
+    completedFiltered: propTypes.bool.isRequired,
+    onCompletedClick: propTypes.func.isRequired
+};
 
-    render() {
-        const { classes } = this.props;
-        return (
-            <div className={classes.filterHeader} >
-                <CompletedFilterButton
-                    enabled={this.state.filterCompleted}
-                    onClick={this.handleCompletedClicked}
-                />
-            </div>
-        )
-    }
+export default withStyles(styles)(FilterHeader);
 
-}
-
-const mapState = state => state;
-
-FilterHeader = connect(mapState, mapDispatchToFilterActions)(FilterHeader);
-FilterHeader = withStyles(styles)(FilterHeader);
-
-export default FilterHeader;

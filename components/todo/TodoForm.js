@@ -105,8 +105,8 @@ const TodoForm = ({ asyncCallsInProgress, todo, classes, onDelete, onInputChange
 };
 
 TodoForm.propTypes = {
-    asyncCallsInProgress: PropTypes.bool.required,
-    onDelete: PropTypes.func.required
+    asyncCallsInProgress: PropTypes.bool.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(TodoForm);

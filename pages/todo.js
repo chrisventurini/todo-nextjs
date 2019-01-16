@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 import EditHeader from '../components/common/BasicNavHeader'
 import Loader from '../components/async/Loader'

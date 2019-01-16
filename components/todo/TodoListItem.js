@@ -63,10 +63,10 @@ const TodoListItem = ({asyncCallsInProgress, classes, onCheckClicked, todo}) => 
 };
 
 TodoListItem.propTypes = {
-    asyncCallsInProgress: PropTypes.bool.required,
-    classes: PropTypes.object.required,
-    onCheckClicked: PropTypes.func.required,
-    todo: PropTypes.object.required
+    asyncCallsInProgress: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
+    onCheckClicked: PropTypes.func.isRequired,
+    todo: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(TodoListItem);
