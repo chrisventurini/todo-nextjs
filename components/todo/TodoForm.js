@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import moment from 'moment';
 
 import Button from '@material-ui/core/Button';
@@ -42,12 +42,12 @@ const styles = {
     }
 };
 
-const TodoForm = ({ asyncCallsInProgress, todo, classes, onDelete, onInputChange, onSubmit}) => {
+const TodoForm = ({ asyncCallsInProgress, ref, todo, classes, onDelete, onInputChange, onSubmit}) => {
 
     let dueDate = moment(todo.dueDate).format('YYYY-MM-DD');
 
     return (
-        <form className={classes.todoEdit} onSubmit={onSubmit}>
+        <form className={classes.todoEdit} onSubmit={onSubmit} ref={ref}>
             <fieldset className={classes.todoFieldSet} disabled={asyncCallsInProgress}>
                 <TextField
                     className={classes.todoInputs}
@@ -105,8 +105,9 @@ const TodoForm = ({ asyncCallsInProgress, todo, classes, onDelete, onInputChange
 };
 
 TodoForm.propTypes = {
-    asyncCallsInProgress: PropTypes.bool.isRequired,
-    onDelete: PropTypes.func.isRequired
+    asyncCallsInProgress: propTypes.bool.isRequired,
+    fromRef: propTypes.object,
+    onDelete: propTypes.func.isRequired
 };
 
 export default withStyles(styles)(TodoForm);

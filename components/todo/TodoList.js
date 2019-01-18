@@ -1,6 +1,4 @@
-import { connect } from 'react-redux'
-
-import todoSorter from '../../services/todoSorter';
+import propTypes from 'prop-types';
 
 import List from '@material-ui/core/List';
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -26,19 +24,9 @@ let TodoList = ({classes, todos}) => {
     )
 };
 
-const mapState = state => {
-    let todos = state.todos;
-
-    if(state.filters && state.filters.completed) {
-        todos = todos.filter(todo => !todo.completed);
-    }
-
-    todos = todoSorter(todos);
-
-    return { todos }
+TodoList.propTypes = {
+    classes: propTypes.object.isRequired,
+    todos: propTypes.array.isRequired
 };
 
-TodoList = connect(mapState)(TodoList);
-TodoList = withStyles(styles)(TodoList);
-
-export default TodoList;
+export default withStyles(styles)(TodoList);

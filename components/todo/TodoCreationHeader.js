@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
@@ -61,37 +60,35 @@ const TodoCreationHeader = ({asyncCallsInProgress, todo, classes, onSubmit, onIn
     return (
         <AppBar>
             <Toolbar>
-                <Typography variant="h6" color="inherit">
-                    <form noValidate autoComplete="off" onSubmit={onSubmit}>
-                        <fieldset className={classes.fieldSet} disabled={asyncCallsInProgress}>
-                            <InputBase
-                                id="to-do-input"
-                                className={classes.todoInput}
-                                placeholder="Title"
-                                name="title"
-                                value={todo.title}
-                                variant="outlined"
-                                onChange={onInputChange}
-                            />
-                            <TextField
-                                id="due-date"
-                                className={classes.dateInput}
-                                label="Due Date"
-                                name="dueDate"
-                                value={dueDate}
-                                type="date"
-                                onChange={onInputChange}
-                            />
-                            <Button
-                                className={classes.button}
-                                disabled={todo.title ? false : true}
-                                type='submit'
-                                className={classes.button}>
-                                Create Todo
-                            </Button>
-                        </fieldset>
-                    </form>
-                </Typography>
+                <form noValidate autoComplete="off" onSubmit={onSubmit}>
+                    <fieldset className={classes.fieldSet} disabled={asyncCallsInProgress}>
+                        <InputBase
+                            id="to-do-input"
+                            className={classes.todoInput}
+                            placeholder="Title"
+                            name="title"
+                            value={todo.title}
+                            variant="outlined"
+                            onChange={onInputChange}
+                        />
+                        <TextField
+                            id="due-date"
+                            className={classes.dateInput}
+                            label="Due Date"
+                            name="dueDate"
+                            value={dueDate}
+                            type="date"
+                            onChange={onInputChange}
+                        />
+                        <Button
+                            className={classes.button}
+                            disabled={todo.title ? false : true}
+                            type='submit'
+                            className={classes.button}>
+                            Create Todo
+                        </Button>
+                    </fieldset>
+                </form>
             </Toolbar>
         </AppBar>
     )

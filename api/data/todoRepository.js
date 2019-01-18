@@ -10,7 +10,7 @@ let todoRepository = {
        });
     },
 
-    get: async function(id) {
+    getById: async function(id) {
         return await db.Todo.findOne({
             where: {
                 id: id
@@ -18,8 +18,16 @@ let todoRepository = {
         });
     },
 
-    getAll: async function() {
-        return await db.Todo.findAll()
+    getAll: async function(options) {
+        if (options) {
+            options = {
+                where: {
+                    ...options
+                }
+            }
+        }
+
+        return await db.Todo.findAll(options)
     },
 
     save: async function(todo) {

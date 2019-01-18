@@ -8,8 +8,8 @@ module.exports = function (app) {
 
     todoRouter.route('/todos/:id')
         .get(async function (req, res) {
-            let id = req.params.id,
-                todo = await todoRepository.get(id);
+            let { id } = req.params,
+                todo = await todoRepository.getById(id);
 
             res.send(todo);
         })
@@ -23,7 +23,20 @@ module.exports = function (app) {
 
     todoRouter.route('/todos')
         .get(async function(req, res) {
-            let data = await todoRepository.getAll();
+            let filterCompleted = true;
+
+            if(req.query.filterCompleted === 'false') {
+                filterCompleted = false;
+            }
+
+            let data;
+
+            if(filterCompleted) {
+                data = await todoRepository.getAll({completed: false});
+            } else {
+                data = await todoRepository.getAll();
+            }
+
             res.send(todoSorter(data));
         })
         .post(async function(req, res) {

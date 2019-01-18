@@ -26,7 +26,11 @@ class ToDoApp extends App {
 
         if(!process.browser || globalSymbols.indexOf(CONTEXT_SYMBOL_KEY) === -1) {
             global[CONTEXT_SYMBOL_KEY] = {
-                theme: createMuiTheme(),
+                theme: createMuiTheme({
+                    typography: {
+                        useNextVariants: true,
+                    },
+                }),
                 sheetsManager: new Map(),
                 sheetsRegistry: new SheetsRegistry(),
                 generateClassName: createGenerateClassName()

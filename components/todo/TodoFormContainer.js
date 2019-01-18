@@ -1,7 +1,6 @@
-import { Component } from 'react';
+import react, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Router from 'next/router';
 
 import TodoForm from './TodoForm';
 
@@ -11,6 +10,7 @@ import { mapDispatchToTodoActions } from '../../store/actions/todos';
 class TodoFormContainer extends Component {
 
     static propTypes = {
+        todo: PropTypes.object.isRequired,
         todoId: PropTypes.string.isRequired
     };
 
@@ -33,6 +33,8 @@ class TodoFormContainer extends Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+        this.formRef = react.createRef();
     }
 
     handleDelete(event) {
@@ -68,6 +70,7 @@ class TodoFormContainer extends Component {
         return (
             <TodoForm
                 asyncCallsInProgress={this.props.asyncCalls.inProgress}
+                ref={this.formRef}
                 todo={this.state}
                 onDelete={this.handleDelete}
                 onSubmit={this.handleSubmit}

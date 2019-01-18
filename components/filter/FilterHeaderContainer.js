@@ -9,16 +9,16 @@ import { mapDispatchToFilterActions } from '../../store/actions/filtering';
 
 class FilterHeaderContainer extends Component {
 
-    state = {
-        filterCompleted: true
-    };
-
     static propTypes = {
         asyncCalls: propTypes.object.isRequired
     };
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            filterCompleted: props.filters.completed
+        };
 
         this.handleCompletedClicked = this.handleCompletedClicked.bind(this);
     }
@@ -42,7 +42,7 @@ class FilterHeaderContainer extends Component {
 }
 
 const mapState = state => {
-    return { asyncCalls: state.asyncCalls };
+    return { asyncCalls: state.asyncCalls, filters: state.filters };
 };
 
 export default connect(mapState, mapDispatchToFilterActions)(FilterHeaderContainer);

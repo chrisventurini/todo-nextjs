@@ -19,6 +19,7 @@
     "isomorphic-unfetch": "3.0.0",
     "moment": "2.22.2",
     "next": "7.0.2",
+    "node-minify": "^3.6.0",
     "node-sass": "^4.9.4",
     "prop-types": "^15.6.2",
     "react": "16.6.0",
