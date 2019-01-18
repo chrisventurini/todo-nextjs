@@ -18,12 +18,7 @@ class TodoPage extends Component {
 
         let uri = `http://localhost:3000/api/todos/${id}`,
 
-            response = await fetch(uri, {
-                headers: {
-                    'cache-control': 'no-cache',
-                    'pragma': 'no-cache'
-                }
-            }),
+            response = await fetch(uri),
 
             todo = await response.json();
 

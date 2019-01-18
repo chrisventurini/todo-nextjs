@@ -6,6 +6,8 @@ import FilterHeaderContainer from '../components/filter/FilterHeaderContainer';
 import Loader from '../components/async/Loader';
 import TodoListContainer from '../components/todo/TodoListContainer';
 
+import store from '../store';
+import { actions } from '../store/actions/todos';
 
 class Index extends Component {
 
@@ -15,16 +17,12 @@ class Index extends Component {
             return {};
         }
 
-        let response = await fetch('http://localhost:3000/api/todos', {
-                headers: {
-                    'cache-control': 'no-cache',
-                    'pragma': 'no-cache'
-                }
-            }),
-
+        let response = await fetch('http://localhost:3000/api/todos?filterCompleted=false'),
             todos = await response.json();
 
-        return { todos };
+        store.dispatch(actions.todoInitialLoad(todos));
+
+        return { };
     }
 
     render () {

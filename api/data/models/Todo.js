@@ -5,10 +5,20 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        completed: DataTypes.BOOLEAN,
-        dueDate: DataTypes.DATE,
+        completed: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
+        dueDate: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
         notes: DataTypes.STRING,
-        title: DataTypes.STRING
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     });
 
     return Todo;

@@ -10,6 +10,7 @@ class TodoCreationHeaderContainer extends Component {
 
     state = {
         title: '',
+        completed: false,
         dueDate: new Date()
     };
 

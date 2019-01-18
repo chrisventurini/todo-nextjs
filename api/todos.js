@@ -36,7 +36,6 @@ module.exports = function (app) {
             } else {
                 data = await todoRepository.getAll();
             }
-
             res.send(todoSorter(data));
         })
         .post(async function(req, res) {

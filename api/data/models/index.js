@@ -14,7 +14,7 @@ let sequelize = new Sequelize("todo", "user", "P@ssw0rd", {
         idle: 10000
     },
 
-    storage: path.join(__dirname, '..', '/todo.sqlite'),
+    storage: path.join(__dirname, '..', '..', '..', '/todo.db'),
 
     operatorsAliases: false
 });
