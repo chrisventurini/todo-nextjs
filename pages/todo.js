@@ -3,8 +3,10 @@ import { Component } from 'react';
 import EditHeader from '../components/common/BasicNavHeader'
 import Loader from '../components/async/Loader'
 import TodoFormContainer from '../components/todo/TodoFormContainer';
-import fetch from "isomorphic-unfetch";
 
+import store from '../store';
+import { actions } from '../store/actions/todos';
+import todoService from '../services/todoService';
 
 
 class TodoPage extends Component {
@@ -16,11 +18,11 @@ class TodoPage extends Component {
             return { id };
         }
 
-        let uri = `http://localhost:3000/api/todos/${id}`,
+        let data = await todoService.fetchAll(),
 
-            response = await fetch(uri),
+            todo = data.collection.find(todo => todo.id === id);
 
-            todo = await response.json();
+        store.dispatch(actions.todoLoad(data));
 
         return { todo, id };
     }

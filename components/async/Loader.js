@@ -6,7 +6,9 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     loaderContainer: {
-        height: '2px',
+        marginTop: '5px',
+        height: '3px',
+        position: 'fixed',
         width: '100%'
     }
 };

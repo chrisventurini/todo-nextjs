@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
@@ -6,27 +7,47 @@ import todoSorter from '../../services/todoSorter';
 import TodoList from './TodoList';
 
 
-let TodoListContainer = ({todos}) => {
-    return (
-        <TodoList todos={todos}/>
-    )
-};
+class TodoListContainer extends Component {
 
-TodoListContainer.propTypes = {
-    todos: propTypes.array.isRequired
-};
+    static propTypes = {
+        count: propTypes.number.isRequired,
+        todos: propTypes.array.isRequired
+    };
 
-const mapState = state => {
-    let todos  = state.todos.collection;
+    constructor(props) {
+        super(props);
 
-
-    if(state.filters && state.filters.completed) {
-        todos = todos.filter(todo => !todo.completed);
+        if(process.browser) {
+            this._onWindowScroll = this._onWindowScroll.bind(this);
+            window.addEventListener('scroll', this._onWindowScroll);
+        }
     }
 
-    todos = todoSorter(todos);
+    _onWindowScroll(event) {
+        console.log('scroll');
+    }
 
-    return { todos }
+    render() {
+        let { todos } = this.props;
+
+        return (
+            <TodoList todos={todos}/>
+        )
+    }
+}
+
+
+
+const mapState = state => {
+    let { collection, count } = state.todos;
+
+    if(state.filters && state.filters.completed) {
+        collection = collection.filter(todo => !todo.completed);
+    }
+
+    collection = todoSorter(collection);
+
+    return { todos: collection, count }
 };
 
 export default connect(mapState)(TodoListContainer);

@@ -7,7 +7,7 @@ export default (state = defaultState.todos, data) => {
         newTodos;
 
     switch (data.type) {
-        case actionTypes.TODO_INITIAL_LOAD:
+        case actionTypes.TODO_LOAD:
             return {
                 ...data,
                 type: undefined

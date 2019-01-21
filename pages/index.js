@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import fetch from 'isomorphic-unfetch';
 
 import TodoCreationHeaderContainer from '../components/todo/TodoCreationHeaderContainer';
 import FilterHeaderContainer from '../components/filter/FilterHeaderContainer';
@@ -8,6 +7,7 @@ import TodoListContainer from '../components/todo/TodoListContainer';
 
 import store from '../store';
 import { actions } from '../store/actions/todos';
+import todoService from '../services/todoService';
 
 class Index extends Component {
 
@@ -17,10 +17,9 @@ class Index extends Component {
             return {};
         }
 
-        let response = await fetch('http://localhost:3000/api/todos?filterCompleted=false'),
-            data = await response.json();
+        let data = await todoService.fetchAll();
 
-        store.dispatch(actions.todoInitialLoad(data));
+        store.dispatch(actions.todoLoad(data));
 
         return { };
     }

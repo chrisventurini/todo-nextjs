@@ -1,5 +1,6 @@
 import propTypes from 'prop-types';
 
+import AppBar from '@material-ui/core/AppBar';
 import Chip from '@material-ui/core/Chip';
 import RadioButtonUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 import RadioButtonChecked from '@material-ui/icons/RadioButtonChecked';
@@ -7,7 +8,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 const completedFilterBtn = {
     marginTop: '7px',
-    marginLeft: '25px'
+    marginLeft: '25px',
+    width: '155px'
 };
 
 const styles = {
@@ -36,7 +38,7 @@ const FilterHeader = ({asyncCallsInProgress, classes, completedFiltered, onCompl
         completedClasses = asyncCallsInProgress ? classes.completedFilterBtnDisabled : classes.completedFilterBtn;
 
     return (
-        <div className={classes.filterHeader} >
+        <AppBar className={classes.filterHeader} >
             <Chip
                 className={completedClasses}
                 disabled={asyncCallsInProgress}
@@ -46,7 +48,7 @@ const FilterHeader = ({asyncCallsInProgress, classes, completedFiltered, onCompl
                 onClick={onCompletedClick}
                 color="primary"
             />
-        </div>
+        </AppBar>
     )
 };
 
