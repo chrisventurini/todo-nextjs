@@ -18,9 +18,9 @@ class Index extends Component {
         }
 
         let response = await fetch('http://localhost:3000/api/todos?filterCompleted=false'),
-            todos = await response.json();
+            data = await response.json();
 
-        store.dispatch(actions.todoInitialLoad(todos));
+        store.dispatch(actions.todoInitialLoad(data));
 
         return { };
     }

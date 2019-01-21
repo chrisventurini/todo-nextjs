@@ -17,7 +17,8 @@ TodoListContainer.propTypes = {
 };
 
 const mapState = state => {
-    let { todos } = state;
+    let todos  = state.todos.collection;
+
 
     if(state.filters && state.filters.completed) {
         todos = todos.filter(todo => !todo.completed);

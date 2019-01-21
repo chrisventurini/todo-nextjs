@@ -1,17 +1,23 @@
+import defaultState from '../defaultState';
 import { actionTypes } from "../actions/todos/index";
 
-export default (state = [], data) => {
-    let newState;
+
+export default (state = defaultState.todos, data) => {
+    let initialTodos = state.collection,
+        newTodos;
+
     switch (data.type) {
-        case actionTypes.TODO_DELETE:
-            newState = state.filter(todo => todo.id !== data.todo.id);
-            break;
         case actionTypes.TODO_INITIAL_LOAD:
-            newState = data.todos ;
+            return {
+                ...data,
+                type: undefined
+            };
+        case actionTypes.TODO_DELETE:
+            newTodos = initialTodos.filter(todo => todo.id !== data.todo.id);
             break;
         case actionTypes.TODO_COMPLETE_SUCCESSFUL:
         case actionTypes.TODO_UPDATE_SUCCESSFUL:
-            newState = state.map(todo => {
+            newTodos = initialTodos.map(todo => {
                 if(todo.id === data.todo.id)
                     return data.todo;
 
@@ -19,12 +25,15 @@ export default (state = [], data) => {
             });
             break;
         case actionTypes.TODO_SAVE_SUCCESSFUL:
-            newState = state.slice(0);
-            newState.push(data.todo);
+            newTodos = initialTodos.slice(0);
+            newTodos.push(data.todo);
             break;
         default:
-            newState = state;
+            return state;
     }
 
-    return newState;
+    return {
+        count: state.count,
+        collection: newTodos
+    };
 }

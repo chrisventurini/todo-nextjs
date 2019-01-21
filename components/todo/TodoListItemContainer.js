@@ -31,7 +31,7 @@ class TodoListItemContainer extends Component {
 }
 
 const mapState = (state, ownProps) => {
-    let todo = state.todos.find(todo => todo.id === ownProps.id);
+    let todo = state.todos.collection.find(todo => todo.id === ownProps.id);
     return {
         asyncCalls: state.asyncCalls,
         todo

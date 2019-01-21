@@ -82,7 +82,7 @@ class TodoFormContainer extends Component {
 }
 
 const mapState = (state, ownProps) => {
-    let todo = state.todos.find(todo => todo.id === ownProps.todoId);
+    let todo = state.todos.collection.find(todo => todo.id === ownProps.todoId);
 
     return {
         asyncCalls: state.asyncCalls,

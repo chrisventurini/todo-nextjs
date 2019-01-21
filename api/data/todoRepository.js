@@ -27,7 +27,12 @@ let todoRepository = {
             }
         }
 
-        return await db.Todo.findAll(options)
+        let data = await db.Todo.findAndCountAll(options);
+
+        return {
+            count: data.count,
+            collection: data.rows
+        };
     },
 
     save: async function(todo) {

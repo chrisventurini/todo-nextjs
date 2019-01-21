@@ -23,20 +23,11 @@ module.exports = function (app) {
 
     todoRouter.route('/todos')
         .get(async function(req, res) {
-            let filterCompleted = true;
+            let data = await todoRepository.getAll();
 
-            if(req.query.filterCompleted === 'false') {
-                filterCompleted = false;
-            }
+            data.collection = todoSorter(data.collection);
 
-            let data;
-
-            if(filterCompleted) {
-                data = await todoRepository.getAll({completed: false});
-            } else {
-                data = await todoRepository.getAll();
-            }
-            res.send(todoSorter(data));
+            res.send(data);
         })
         .post(async function(req, res) {
             let todo = await todoRepository.save(req.body);
