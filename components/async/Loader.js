@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
@@ -21,6 +22,11 @@ let Loader = ({ asyncCalls, classes }) => {
             {loader}
         </div>
     );
+};
+
+Loader.propTypes = {
+    asyncCalls: propTypes.object.isRequired,
+    classes: propTypes.object.isRequired,
 };
 
 const mapState = state => {

@@ -5,11 +5,21 @@
   "main": "index.js",
   "scripts": {
     "dev": "node $NODE_DEBUG_OPTION server.js",
-    "build": "next build"
+    "build": "next build",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "testRegex": "/__tests__/.*test\\.js?$",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFilesAfterEnv": [
+      "./setupTests.js"
+    ]
+  },
   "dependencies": {
     "@material-ui/core": "3.3.2",
     "@material-ui/icons": "^3.0.1",
@@ -31,5 +41,12 @@
     "redux-saga": "0.16.2",
     "sequelize": "4.41.1",
     "sqlite3": "4.0.3"
+  },
+  "devDependencies": {
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0",
+    "enzyme-redux": "^0.2.1",
+    "enzyme-to-json": "^3.3.5",
+    "jest-cli": "^24.0.0"
   }
 }
