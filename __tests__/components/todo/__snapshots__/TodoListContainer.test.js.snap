@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoListContainer /> constructing and rendering with the completed filter disabled should render correctly 1`] = `
+<WithStyles(TodoList)
+  todos={
+    Array [
+      Object {
+        "completed": true,
+      },
+      Object {
+        "completed": true,
+      },
+      Object {
+        "completed": false,
+      },
+      Object {
+        "completed": false,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`<TodoListContainer /> constructing and rendering with the completed filter enabled should render correctly 1`] = `
+<WithStyles(TodoList)
+  todos={
+    Array [
+      Object {
+        "completed": false,
+      },
+      Object {
+        "completed": false,
+      },
+    ]
+  }
+/>
+`;

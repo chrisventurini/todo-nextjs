@@ -37,7 +37,6 @@ class TodoListContainer extends Component {
 }
 
 
-
 const mapState = state => {
     let { collection, count } = state.todos;
 

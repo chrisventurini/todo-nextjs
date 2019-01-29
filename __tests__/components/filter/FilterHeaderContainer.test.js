@@ -15,7 +15,7 @@ describe('<FilterHeaderContainer />', () => {
             let store = mockStoreBuilder(storeData);
             SUTWrapper = shallow(<FilterHeaderContainer store={store}/>).dive();
         });
-        
+
         it('should have the stores asyncCalls as a property', () => {
             expect(SUTWrapper.instance().props).toHaveProperty('asyncCalls', storeData.asyncCalls);
         });
