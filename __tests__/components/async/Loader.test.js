@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import mockStoreBuilder from '../../utils/mockStoreBuilder';
+import { mockStoreBuilder } from '../../utils/mockBuilders';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -10,12 +10,15 @@ describe('<Loader />', () => {
 
     describe('rendering', () => {
         let SUTWrapper,
-            storeData;
+            storeData,
+            stubClasses;
 
         beforeEach(() => {
             storeData = {asyncCalls: { inProgress: true }};
+            stubClasses = { loaderContainer: 'loaderContainer' };
+
             let store = mockStoreBuilder(storeData);
-            SUTWrapper = shallow(<Loader store={store}/>).dive();
+            SUTWrapper = shallow(<Loader classes={stubClasses} store={store}/>).dive();
         });
 
         it('should have the stores asyncCalls as a property', () => {
@@ -27,10 +30,9 @@ describe('<Loader />', () => {
         });
 
         it('should assign the loader container classes to the wrapping div', () => {
-           let { classes } = SUTWrapper.props(),
-               firstDiv = SUTWrapper.first().dive();
+           let firstDiv = SUTWrapper.first().dive();
 
-           expect(firstDiv.hasClass(classes.loaderContainer)).toBe(true);
+           expect(firstDiv.hasClass(stubClasses.loaderContainer)).toBe(true);
         });
 
     });

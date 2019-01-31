@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme/build";
 
-import mockStoreBuilder from "../../utils/mockStoreBuilder";
+import { mockStoreBuilder } from "../../utils/mockBuilders";
 
 import TodoListContainer from '../../../components/todo/TodoListContainer'
 
@@ -31,6 +31,10 @@ describe('<TodoListContainer />', () => {
         };
 
         mockTodoSorter.mockImplementation(todos => todos);
+    });
+
+    afterAll(() => {
+       jest.resetAllMocks();
     });
 
     describe('constructing and rendering', () => {

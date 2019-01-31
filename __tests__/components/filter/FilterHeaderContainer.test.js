@@ -1,8 +1,10 @@
-import mockStoreBuilder from "../../utils/mockStoreBuilder";
+import React from "react";
 import {shallow} from "enzyme/build";
+
 import FilterHeader from "../../../components/filter/FilterHeader";
 import FilterHeaderContainer from "../../../components/filter/FilterHeaderContainer";
-import React from "react";
+
+import { mockStoreBuilder } from "../../utils/mockBuilders";
 
 describe('<FilterHeaderContainer />', () => {
 
