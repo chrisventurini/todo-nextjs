@@ -7,7 +7,7 @@ import todoSorter from '../../services/todoSorter';
 import TodoList from './TodoList';
 
 
-class TodoListContainer extends Component {
+export class TodoListContainer extends Component {
 
     static propTypes = {
         count: propTypes.number.isRequired,
@@ -37,7 +37,7 @@ class TodoListContainer extends Component {
 }
 
 
-const mapState = state => {
+export const _mapState = state => {
     let { collection, count } = state.todos;
 
     if(state.filters && state.filters.completed) {
@@ -49,4 +49,4 @@ const mapState = state => {
     return { todos: collection, count }
 };
 
-export default connect(mapState)(TodoListContainer);
+export default connect(_mapState)(TodoListContainer);
