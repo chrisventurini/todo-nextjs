@@ -1,33 +1,24 @@
 import React from "react";
 import {shallow} from "enzyme/build";
 
-import FilterHeader from "../../../components/filter/FilterHeader";
-import FilterHeaderContainer from "../../../components/filter/FilterHeaderContainer";
-
-import { mockStoreBuilder } from "../../utils/mockBuilders";
+import { FilterHeaderContainer, _mapState } from "../../../components/filter/FilterHeaderContainer";
 
 describe('<FilterHeaderContainer />', () => {
+    let SUTWrapper,
+        asyncCalls,
+        filters;
 
-    describe('rendering', () => {
-        let SUTWrapper,
-            storeData;
+    beforeEach(() => {
+        asyncCalls = { inProgress: true };
+        filters = { completed: true };
+    });
 
-        beforeAll(() => {
-            storeData = { asyncCalls: {}, filters: {} };
-            let store = mockStoreBuilder(storeData);
-            SUTWrapper = shallow(<FilterHeaderContainer store={store}/>).dive();
-        });
+    describe('constructing and rendering', () => {
 
-        it('should have the stores asyncCalls as a property', () => {
-            expect(SUTWrapper.instance().props).toHaveProperty('asyncCalls', storeData.asyncCalls);
-        });
-
-        it('should have the stores filters as a property', () => {
-            expect(SUTWrapper.instance().props).toHaveProperty('filters', storeData.asyncCalls);
-        });
-
-        it('should have the stores todo actions as a property', () => {
-            expect(SUTWrapper.instance().props).toHaveProperty('actions');
+        beforeEach(() => {
+            SUTWrapper = shallow(<FilterHeaderContainer
+                                    asyncCalls={asyncCalls}
+                                    filters={filters} />).dive();
         });
 
         it('should render correctly', () => {
@@ -37,27 +28,57 @@ describe('<FilterHeaderContainer />', () => {
     });
 
     describe('When handling a completed filter clicked', () => {
-        let SUTWrapper,
-            toggleCompletedSpy,
-            storeData;
+        let toggleFilterCompletedSpy;
 
-        beforeAll(() => {
-            storeData = { asyncCalls: {}, filters: { completed: true } };
-            let store = mockStoreBuilder(storeData);
-            SUTWrapper = shallow(<FilterHeaderContainer store={store}/>).dive();
+        beforeEach((done) => {
+            SUTWrapper = shallow(<FilterHeaderContainer
+                                    asyncCalls={asyncCalls}
+                                    filters={filters} />);
 
-            toggleCompletedSpy = jest.fn();
-            SUTWrapper.instance().props.actions.toggleFilterCompleted = toggleCompletedSpy;
+            toggleFilterCompletedSpy = jest.fn();
 
-            SUTWrapper.find(FilterHeader).props().onCompletedClick();
+            SUTWrapper.setProps({
+                actions: {
+                    toggleFilterCompleted: toggleFilterCompletedSpy
+                }
+            }, () => {
+                SUTWrapper.instance().handleCompletedClicked();
+
+                done();
+            });
+
         });
 
         it('should flip the filterCompleted state', () => {
-            expect(SUTWrapper.state('filterCompleted')).toBe(false);
+            expect(SUTWrapper.state('filterCompleted')).toBe(!filters.completed);
         });
 
-        it('should dispatch', () => {
-            expect(toggleCompletedSpy).toHaveBeenCalled();
+        it('should call the toggleFilterCompleted action', () => {
+            expect(toggleFilterCompletedSpy).toHaveBeenCalled();
+        });
+
+    });
+
+});
+
+describe('<FilterHeaderContainer /> _mapState', () => {
+    let state,
+        results;
+
+    describe('when executing', () => {
+
+        beforeEach(() => {
+            state = {
+                asyncCalls: {},
+                filters: {}
+            };
+
+            results = _mapState(state);
+        });
+
+        it('should assign the states asyncCalls and filters to the returned props', () => {
+            expect(results).toHaveProperty('asyncCalls', state.asyncCalls);
+            expect(results).toHaveProperty('filters', state.filters);
         });
 
     });

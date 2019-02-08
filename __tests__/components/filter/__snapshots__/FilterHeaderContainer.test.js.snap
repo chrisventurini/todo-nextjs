@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FilterHeaderContainer /> rendering should render correctly 1`] = `
-<WithStyles(FilterHeader)
+exports[`<FilterHeaderContainer /> constructing and rendering should render correctly 1`] = `
+<FilterHeader
+  asyncCallsInProgress={true}
+  classes={
+    Object {
+      "completedFilterBtn": "FilterHeader-completedFilterBtn-2",
+      "completedFilterBtnDisabled": "FilterHeader-completedFilterBtnDisabled-3",
+      "filterHeader": "FilterHeader-filterHeader-1",
+    }
+  }
+  completedFiltered={true}
   onCompletedClick={[Function]}
 />
 `;

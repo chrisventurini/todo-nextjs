@@ -1,463 +1,107 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Loader /> rendering with async calls in progress should render correctly 1`] = `
-<WithStyles(Connect(Loader))
-  store={
+exports[`<Loader /> constructing and rendering with async calls in progress should render correctly 1`] = `
+<WithStyles(Loader)
+  asyncCalls={
     Object {
-      "dispatch": [MockFunction],
-      "getState": [MockFunction] {
-        "calls": Array [
-          Array [],
-          Array [],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": Object {
-              "asyncCalls": Object {
-                "inProgress": true,
-              },
-            },
-          },
-          Object {
-            "type": "return",
-            "value": Object {
-              "asyncCalls": Object {
-                "inProgress": true,
-              },
-            },
-          },
-        ],
-      },
-      "subscribe": [MockFunction] {
-        "calls": Array [
-          Array [
-            [Function],
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": undefined,
-          },
-        ],
-      },
+      "inProgress": true,
+    }
+  }
+  classes={
+    Object {
+      "loaderContainer": "loaderContainer",
     }
   }
 >
-  <Connect(Loader)
-    classes={
+  <Loader
+    asyncCalls={
       Object {
-        "loaderContainer": "Connect-Loader--loaderContainer-1",
+        "inProgress": true,
       }
     }
-    store={
+    classes={
       Object {
-        "dispatch": [MockFunction],
-        "getState": [MockFunction] {
-          "calls": Array [
-            Array [],
-            Array [],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": Object {
-                "asyncCalls": Object {
-                  "inProgress": true,
-                },
-              },
-            },
-            Object {
-              "type": "return",
-              "value": Object {
-                "asyncCalls": Object {
-                  "inProgress": true,
-                },
-              },
-            },
-          ],
-        },
-        "subscribe": [MockFunction] {
-          "calls": Array [
-            Array [
-              [Function],
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        },
+        "loaderContainer": "Loader-loaderContainer-1 loaderContainer",
       }
     }
   >
-    <Loader
-      asyncCalls={
-        Object {
-          "inProgress": true,
-        }
-      }
-      classes={
-        Object {
-          "loaderContainer": "Connect-Loader--loaderContainer-1",
-        }
-      }
-      dispatch={[MockFunction]}
-      store={
-        Object {
-          "dispatch": [MockFunction],
-          "getState": [MockFunction] {
-            "calls": Array [
-              Array [],
-              Array [],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": Object {
-                  "asyncCalls": Object {
-                    "inProgress": true,
-                  },
-                },
-              },
-              Object {
-                "type": "return",
-                "value": Object {
-                  "asyncCalls": Object {
-                    "inProgress": true,
-                  },
-                },
-              },
-            ],
-          },
-          "subscribe": [MockFunction] {
-            "calls": Array [
-              Array [
-                [Function],
-              ],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-            ],
-          },
-        }
-      }
-      storeSubscription={
-        Subscription {
-          "listeners": Object {
-            "clear": [Function],
-            "get": [Function],
-            "notify": [Function],
-            "subscribe": [Function],
-          },
-          "onStateChange": [Function],
-          "parentSub": undefined,
-          "store": Object {
-            "dispatch": [MockFunction],
-            "getState": [MockFunction] {
-              "calls": Array [
-                Array [],
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": Object {
-                    "asyncCalls": Object {
-                      "inProgress": true,
-                    },
-                  },
-                },
-                Object {
-                  "type": "return",
-                  "value": Object {
-                    "asyncCalls": Object {
-                      "inProgress": true,
-                    },
-                  },
-                },
-              ],
-            },
-            "subscribe": [MockFunction] {
-              "calls": Array [
-                Array [
-                  [Function],
-                ],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            },
-          },
-          "unsubscribe": undefined,
-        }
-      }
+    <div
+      className="Loader-loaderContainer-1 loaderContainer"
     >
-      <div
-        className="Connect-Loader--loaderContainer-1"
-      >
-        <WithStyles(LinearProgress)>
-          <LinearProgress
-            classes={
-              Object {
-                "bar": "MuiLinearProgress-bar-10",
-                "bar1Buffer": "MuiLinearProgress-bar1Buffer-15",
-                "bar1Determinate": "MuiLinearProgress-bar1Determinate-14",
-                "bar1Indeterminate": "MuiLinearProgress-bar1Indeterminate-13",
-                "bar2Buffer": "MuiLinearProgress-bar2Buffer-18",
-                "bar2Determinate": "MuiLinearProgress-bar2Determinate-17",
-                "bar2Indeterminate": "MuiLinearProgress-bar2Indeterminate-16",
-                "barColorPrimary": "MuiLinearProgress-barColorPrimary-11",
-                "barColorSecondary": "MuiLinearProgress-barColorSecondary-12",
-                "buffer": "MuiLinearProgress-buffer-5",
-                "colorPrimary": "MuiLinearProgress-colorPrimary-3",
-                "colorSecondary": "MuiLinearProgress-colorSecondary-4",
-                "dashed": "MuiLinearProgress-dashed-7",
-                "dashedColorPrimary": "MuiLinearProgress-dashedColorPrimary-8",
-                "dashedColorSecondary": "MuiLinearProgress-dashedColorSecondary-9",
-                "query": "MuiLinearProgress-query-6",
-                "root": "MuiLinearProgress-root-2",
-              }
+      <WithStyles(LinearProgress)>
+        <LinearProgress
+          classes={
+            Object {
+              "bar": "MuiLinearProgress-bar-10",
+              "bar1Buffer": "MuiLinearProgress-bar1Buffer-15",
+              "bar1Determinate": "MuiLinearProgress-bar1Determinate-14",
+              "bar1Indeterminate": "MuiLinearProgress-bar1Indeterminate-13",
+              "bar2Buffer": "MuiLinearProgress-bar2Buffer-18",
+              "bar2Determinate": "MuiLinearProgress-bar2Determinate-17",
+              "bar2Indeterminate": "MuiLinearProgress-bar2Indeterminate-16",
+              "barColorPrimary": "MuiLinearProgress-barColorPrimary-11",
+              "barColorSecondary": "MuiLinearProgress-barColorSecondary-12",
+              "buffer": "MuiLinearProgress-buffer-5",
+              "colorPrimary": "MuiLinearProgress-colorPrimary-3",
+              "colorSecondary": "MuiLinearProgress-colorSecondary-4",
+              "dashed": "MuiLinearProgress-dashed-7",
+              "dashedColorPrimary": "MuiLinearProgress-dashedColorPrimary-8",
+              "dashedColorSecondary": "MuiLinearProgress-dashedColorSecondary-9",
+              "query": "MuiLinearProgress-query-6",
+              "root": "MuiLinearProgress-root-2",
             }
-            color="primary"
-            variant="indeterminate"
+          }
+          color="primary"
+          variant="indeterminate"
+        >
+          <div
+            className="MuiLinearProgress-root-2 MuiLinearProgress-colorPrimary-3"
+            role="progressbar"
           >
             <div
-              className="MuiLinearProgress-root-2 MuiLinearProgress-colorPrimary-3"
-              role="progressbar"
-            >
-              <div
-                className="MuiLinearProgress-bar-10 MuiLinearProgress-barColorPrimary-11 MuiLinearProgress-bar1Indeterminate-13"
-                style={Object {}}
-              />
-              <div
-                className="MuiLinearProgress-bar-10 MuiLinearProgress-barColorPrimary-11 MuiLinearProgress-bar2Indeterminate-16"
-                style={Object {}}
-              />
-            </div>
-          </LinearProgress>
-        </WithStyles(LinearProgress)>
-      </div>
-    </Loader>
-  </Connect(Loader)>
-</WithStyles(Connect(Loader))>
+              className="MuiLinearProgress-bar-10 MuiLinearProgress-barColorPrimary-11 MuiLinearProgress-bar1Indeterminate-13"
+              style={Object {}}
+            />
+            <div
+              className="MuiLinearProgress-bar-10 MuiLinearProgress-barColorPrimary-11 MuiLinearProgress-bar2Indeterminate-16"
+              style={Object {}}
+            />
+          </div>
+        </LinearProgress>
+      </WithStyles(LinearProgress)>
+    </div>
+  </Loader>
+</WithStyles(Loader)>
 `;
 
-exports[`<Loader /> rendering with async calls not in progress should render correctly 1`] = `
-<WithStyles(Connect(Loader))
-  store={
+exports[`<Loader /> constructing and rendering with no async calls in progress should render correctly 1`] = `
+<WithStyles(Loader)
+  asyncCalls={
     Object {
-      "dispatch": [MockFunction],
-      "getState": [MockFunction] {
-        "calls": Array [
-          Array [],
-          Array [],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": Object {
-              "asyncCalls": Object {
-                "inProgress": false,
-              },
-            },
-          },
-          Object {
-            "type": "return",
-            "value": Object {
-              "asyncCalls": Object {
-                "inProgress": false,
-              },
-            },
-          },
-        ],
-      },
-      "subscribe": [MockFunction] {
-        "calls": Array [
-          Array [
-            [Function],
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": undefined,
-          },
-        ],
-      },
+      "inProgress": false,
+    }
+  }
+  classes={
+    Object {
+      "loaderContainer": "loaderContainer",
     }
   }
 >
-  <Connect(Loader)
-    classes={
+  <Loader
+    asyncCalls={
       Object {
-        "loaderContainer": "Connect-Loader--loaderContainer-1",
+        "inProgress": false,
       }
     }
-    store={
+    classes={
       Object {
-        "dispatch": [MockFunction],
-        "getState": [MockFunction] {
-          "calls": Array [
-            Array [],
-            Array [],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": Object {
-                "asyncCalls": Object {
-                  "inProgress": false,
-                },
-              },
-            },
-            Object {
-              "type": "return",
-              "value": Object {
-                "asyncCalls": Object {
-                  "inProgress": false,
-                },
-              },
-            },
-          ],
-        },
-        "subscribe": [MockFunction] {
-          "calls": Array [
-            Array [
-              [Function],
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": undefined,
-            },
-          ],
-        },
+        "loaderContainer": "Loader-loaderContainer-1 loaderContainer",
       }
     }
   >
-    <Loader
-      asyncCalls={
-        Object {
-          "inProgress": false,
-        }
-      }
-      classes={
-        Object {
-          "loaderContainer": "Connect-Loader--loaderContainer-1",
-        }
-      }
-      dispatch={[MockFunction]}
-      store={
-        Object {
-          "dispatch": [MockFunction],
-          "getState": [MockFunction] {
-            "calls": Array [
-              Array [],
-              Array [],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": Object {
-                  "asyncCalls": Object {
-                    "inProgress": false,
-                  },
-                },
-              },
-              Object {
-                "type": "return",
-                "value": Object {
-                  "asyncCalls": Object {
-                    "inProgress": false,
-                  },
-                },
-              },
-            ],
-          },
-          "subscribe": [MockFunction] {
-            "calls": Array [
-              Array [
-                [Function],
-              ],
-            ],
-            "results": Array [
-              Object {
-                "type": "return",
-                "value": undefined,
-              },
-            ],
-          },
-        }
-      }
-      storeSubscription={
-        Subscription {
-          "listeners": Object {
-            "clear": [Function],
-            "get": [Function],
-            "notify": [Function],
-            "subscribe": [Function],
-          },
-          "onStateChange": [Function],
-          "parentSub": undefined,
-          "store": Object {
-            "dispatch": [MockFunction],
-            "getState": [MockFunction] {
-              "calls": Array [
-                Array [],
-                Array [],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": Object {
-                    "asyncCalls": Object {
-                      "inProgress": false,
-                    },
-                  },
-                },
-                Object {
-                  "type": "return",
-                  "value": Object {
-                    "asyncCalls": Object {
-                      "inProgress": false,
-                    },
-                  },
-                },
-              ],
-            },
-            "subscribe": [MockFunction] {
-              "calls": Array [
-                Array [
-                  [Function],
-                ],
-              ],
-              "results": Array [
-                Object {
-                  "type": "return",
-                  "value": undefined,
-                },
-              ],
-            },
-          },
-          "unsubscribe": undefined,
-        }
-      }
-    >
-      <div
-        className="Connect-Loader--loaderContainer-1"
-      />
-    </Loader>
-  </Connect(Loader)>
-</WithStyles(Connect(Loader))>
+    <div
+      className="Loader-loaderContainer-1 loaderContainer"
+    />
+  </Loader>
+</WithStyles(Loader)>
 `;

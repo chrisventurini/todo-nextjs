@@ -1,5 +1,5 @@
-import App, {Container} from 'next/app';
 import React from 'react';
+import App, {Container} from 'next/app';
 import { Provider } from 'react-redux';
 
 import { SheetsRegistry } from 'jss';

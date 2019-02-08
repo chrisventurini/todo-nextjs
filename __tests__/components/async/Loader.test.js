@@ -1,78 +1,57 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { mockStoreBuilder } from '../../utils/mockBuilders';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-import Loader from '../../../components/async/Loader';
+import { Loader, _mapState } from '../../../components/async/Loader';
 
 describe('<Loader />', () => {
 
-    describe('rendering', () => {
+    describe('constructing and rendering', () => {
         let SUTWrapper,
-            storeData,
+            asyncCalls,
             stubClasses;
 
-        beforeEach(() => {
-            storeData = {asyncCalls: { inProgress: true }};
-            stubClasses = { loaderContainer: 'loaderContainer' };
+        describe('with async calls in progress', () => {
 
-            let store = mockStoreBuilder(storeData);
-            SUTWrapper = shallow(<Loader classes={stubClasses} store={store}/>).dive();
+            beforeEach(() => {
+                stubClasses = { loaderContainer: 'loaderContainer' };
+                asyncCalls = { inProgress: true };
+
+                SUTWrapper = mount(<Loader asyncCalls={asyncCalls} classes={stubClasses} />);
+            });
+
+            it('should render correctly', () => {
+               expect(SUTWrapper).toMatchSnapshot();
+            });
+
+            it('should render a <LinearProgress />', () => {
+                let foundEls = SUTWrapper.find(LinearProgress);
+
+                expect(foundEls).toHaveLength(1);
+            });
+
         });
 
-        it('should have the stores asyncCalls as a property', () => {
-            expect(SUTWrapper.props()).toHaveProperty('asyncCalls', storeData.asyncCalls);
-        });
+        describe('with no async calls in progress', () => {
 
-        it('should have the jss classes as a property', () => {
-            expect(SUTWrapper.props()).toHaveProperty('classes');
-        });
+            beforeEach(() => {
+                stubClasses = { loaderContainer: 'loaderContainer' };
+                asyncCalls = { inProgress: false };
 
-        it('should assign the loader container classes to the wrapping div', () => {
-           let firstDiv = SUTWrapper.first().dive();
+                SUTWrapper = mount(<Loader asyncCalls={asyncCalls} classes={stubClasses} />);
+            });
 
-           expect(firstDiv.hasClass(stubClasses.loaderContainer)).toBe(true);
-        });
+            it('should render correctly', () => {
+               expect(SUTWrapper).toMatchSnapshot();
+            });
 
-    });
+            it('should render a <LinearProgress />', () => {
+                let foundEls = SUTWrapper.find(LinearProgress);
 
-    describe('rendering with async calls in progress', () => {
-        let SUTWrapper;
+                expect(foundEls).toHaveLength(0);
+            });
 
-        beforeEach(() => {
-            let store = mockStoreBuilder({asyncCalls: { inProgress: true }});
-            SUTWrapper = mount(<Loader store={store}/>);
-        });
-
-        it('should render correctly', () => {
-            expect(SUTWrapper).toMatchSnapshot();
-        });
-
-        it('should render a <LinearProgress />', () => {
-            let foundEls = SUTWrapper.find(LinearProgress);
-
-            expect(foundEls).toHaveLength(1);
-        });
-
-    });
-
-    describe('rendering with async calls not in progress', () => {
-        let SUTWrapper;
-
-        beforeEach(() => {
-            let store = mockStoreBuilder({asyncCalls: { inProgress: false }});
-            SUTWrapper = mount(<Loader store={store}/>);
-        });
-
-        it('should render correctly', () => {
-            expect(SUTWrapper).toMatchSnapshot();
-        });
-
-        it('it should not render a <LinearProgress />', () => {
-            let foundEls = SUTWrapper.find(LinearProgress);
-
-            expect(foundEls).toHaveLength(0);
         });
 
     });

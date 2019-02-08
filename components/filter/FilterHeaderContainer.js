@@ -7,10 +7,11 @@ import FilterHeader from './FilterHeader';
 import { mapDispatchToFilterActions } from '../../store/actions/filtering';
 
 
-class FilterHeaderContainer extends Component {
+export class FilterHeaderContainer extends Component {
 
     static propTypes = {
-        asyncCalls: propTypes.object.isRequired
+        asyncCalls: propTypes.object.isRequired,
+        filters: propTypes.object.isRequired
     };
 
     constructor(props) {
@@ -41,9 +42,12 @@ class FilterHeaderContainer extends Component {
     }
 }
 
-const mapState = state => {
-    return { asyncCalls: state.asyncCalls, filters: state.filters };
+export const _mapState = state => {
+    return {
+        asyncCalls: state.asyncCalls,
+        filters: state.filters
+    };
 };
 
-export default connect(mapState, mapDispatchToFilterActions)(FilterHeaderContainer);
+export default connect(_mapState, mapDispatchToFilterActions)(FilterHeaderContainer);
 

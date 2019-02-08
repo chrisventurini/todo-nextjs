@@ -14,7 +14,7 @@ const styles = {
     }
 };
 
-let Loader = ({ asyncCalls, classes }) => {
+export let Loader = ({ asyncCalls, classes }) => {
     let loader = (asyncCalls.inProgress) ? (<LinearProgress />) : (<Fragment />);
 
     return (
@@ -29,11 +29,10 @@ Loader.propTypes = {
     classes: propTypes.object.isRequired,
 };
 
-const mapState = state => {
-    return { asyncCalls: state.asyncCalls}
+export const _mapState = state => {
+    return { asyncCalls: state.asyncCalls }
 };
 
-Loader = connect(mapState)(Loader);
 Loader = withStyles(styles)(Loader);
 
-export default Loader;
+export default connect(_mapState)(Loader);

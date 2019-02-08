@@ -1,4 +1,4 @@
-import defaultStore from '../../store/defaultState';
+import defaultStore from '../store/defaultState';
 
 export function mockRouterBuilder() {
     return {

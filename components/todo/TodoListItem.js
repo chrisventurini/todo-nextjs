@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import moment from 'moment';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
+import Link from 'next/link';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -63,10 +63,10 @@ const TodoListItem = ({asyncCallsInProgress, classes, onCheckClicked, todo}) => 
 };
 
 TodoListItem.propTypes = {
-    asyncCallsInProgress: PropTypes.bool.isRequired,
-    classes: PropTypes.object.isRequired,
-    onCheckClicked: PropTypes.func.isRequired,
-    todo: PropTypes.object.isRequired
+    asyncCallsInProgress: propTypes.bool.isRequired,
+    classes: propTypes.object.isRequired,
+    onCheckClicked: propTypes.func.isRequired,
+    todo: propTypes.object.isRequired
 };
 
 export default withStyles(styles)(TodoListItem);
