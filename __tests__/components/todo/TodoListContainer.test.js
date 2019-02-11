@@ -1,4 +1,5 @@
 import React from "react";
+import * as propTypes from "prop-types";
 import { shallow } from "enzyme/build";
 
 import { _mapState, TodoListContainer } from '../../../components/todo/TodoListContainer';
@@ -12,11 +13,59 @@ describe('<TodoListContainer />', () => {
         count,
         todos;
 
-    describe('constructing and rendering', () => {
+    beforeEach(() => {
+        todos = [{}, {}];
+        count = todos.length;
+    });
+
+    it('should have static propTypes defined', () => {
+        let expectedPropTypes = {
+            count: propTypes.number.isRequired,
+            todos: propTypes.array.isRequired
+        };
+
+        expect(TodoListContainer).toHaveProperty('propTypes', expectedPropTypes);
+    });
+
+    describe('when constructing', () => {
+
+        describe('within the browser', () => {
+
+            beforeEach(() => {
+                process.browser = true;
+
+                window.addEventListener = jest.fn();
+
+                SUTWrapper = shallow(<TodoListContainer todos={todos} count={count} />);
+            });
+
+            it('should have a set the scroll event to the instance onWindowScroll function ', () => {
+                expect(window.addEventListener).toHaveBeenCalledWith('scroll', SUTWrapper.instance()._onWindowScroll);
+            });
+
+        });
+
+        describe('not within the browser', () => {
+
+            beforeEach(() => {
+                process.browser = false;
+
+                window.addEventListener = jest.fn();
+
+                SUTWrapper = shallow(<TodoListContainer todos={todos} count={count} />);
+            });
+
+            it('should have a set the scroll event to the instance onWindowScroll function ', () => {
+                expect(window.addEventListener).not.toHaveBeenCalled();
+            });
+
+        });
+
+    });
+
+    describe('when rendering', () => {
 
         beforeEach(() => {
-            todos = [{}, {}];
-            count = todos.length;
             SUTWrapper = shallow(<TodoListContainer todos={todos} count={count} />).dive();
         });
 

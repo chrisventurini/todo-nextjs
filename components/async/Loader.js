@@ -33,6 +33,5 @@ export const _mapState = state => {
     return { asyncCalls: state.asyncCalls }
 };
 
-Loader = withStyles(styles)(Loader);
-
-export default connect(_mapState)(Loader);
+let styledLoader = withStyles(styles)(Loader);
+export default connect(_mapState)(styledLoader);

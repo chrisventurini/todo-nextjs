@@ -2,9 +2,10 @@ import React from "react";
 import { mount } from "enzyme/build";
 import Router from 'next/router';
 
-import TodoListItem from '../../../components/todo/TodoListItem';
+import { TodoListItem } from '../../../components/todo/TodoListItem';
 
 import { mockRouterBuilder } from '../../../__testutils__/mockBuilders'
+import * as propTypes from "prop-types";
 
 describe('<TodoListItem />', () => {
     let SUTWrapper,
@@ -23,6 +24,17 @@ describe('<TodoListItem />', () => {
            dueDate: new Date(2000, 1, 1),
            id: 'bc995789-f666-4f15-8fa4-739d3182a808'
         };
+    });
+
+    it('should have static propTypes defined', () => {
+        let expectedPropTypes = {
+            asyncCallsInProgress: propTypes.bool.isRequired,
+            classes: propTypes.object.isRequired,
+            onCheckClicked: propTypes.func.isRequired,
+            todo: propTypes.object.isRequired
+        };
+
+        expect(TodoListItem).toHaveProperty('propTypes', expectedPropTypes)
     });
 
     describe('when rendering', () => {

@@ -35,7 +35,7 @@ const styles = {
     }
 };
 
-const TodoListItem = ({asyncCallsInProgress, classes, onCheckClicked, todo}) => {
+export let TodoListItem = ({asyncCallsInProgress, classes, onCheckClicked, todo}) => {
 
     let  dueDate = moment(todo.dueDate).format('MM/DD/YYYY'),
          itemClass = classes.todoItem;

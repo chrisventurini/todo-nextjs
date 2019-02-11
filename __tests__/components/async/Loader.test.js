@@ -1,11 +1,21 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import propTypes from 'prop-types';
+import { mount } from 'enzyme';
 
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { Loader, _mapState } from '../../../components/async/Loader';
 
 describe('<Loader />', () => {
+
+    it('should have static propTypes defined', () => {
+        let expectedPropTypes = {
+            asyncCalls: propTypes.object.isRequired,
+            classes: propTypes.object.isRequired,
+        };
+        console.log(Loader.propTypes);
+        expect(Loader).toHaveProperty('propTypes', expectedPropTypes);
+    });
 
     describe('constructing and rendering', () => {
         let SUTWrapper,
@@ -52,6 +62,28 @@ describe('<Loader />', () => {
                 expect(foundEls).toHaveLength(0);
             });
 
+        });
+
+    });
+
+});
+
+describe('<Loader /> _mapstate', () => {
+
+    describe('when executing', () => {
+        let state,
+            results;
+
+        beforeEach(() => {
+            state = {
+                asyncCalls: { inProgress: false }
+            };
+
+            results = _mapState(state)
+        });
+
+        it('should return the asyncCalls that are part of the state', () => {
+            expect(results).toHaveProperty('asyncCalls', state.asyncCalls);
         });
 
     });
