@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
+import { mapDispatchToTodoActions } from '../../store/actions/todos/index';
 import todoSorter from '../../services/todoSorter';
 
 import TodoList from './TodoList';
@@ -49,4 +50,4 @@ export const _mapState = state => {
     return { todos: collection, count }
 };
 
-export default connect(_mapState)(TodoListContainer);
+export default connect(_mapState, mapDispatchToTodoActions)(TodoListContainer);

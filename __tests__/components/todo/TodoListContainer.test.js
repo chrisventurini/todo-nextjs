@@ -2,9 +2,12 @@ import React from "react";
 import * as propTypes from "prop-types";
 import { shallow } from "enzyme/build";
 
-import { _mapState, TodoListContainer } from '../../../components/todo/TodoListContainer';
+import ConnectedTodoListContainer, { _mapState, TodoListContainer } from '../../../components/todo/TodoListContainer';
 
-//Mocked imports
+// Test utils
+import { mockStoreBuilder } from "../../../__testutils__/mockBuilders"
+
+// Mocked imports
 jest.mock('../../../services/todoSorter');
 import mockTodoSorter from '../../../services/todoSorter';
 
@@ -14,8 +17,19 @@ describe('<TodoListContainer />', () => {
         todos;
 
     beforeEach(() => {
-        todos = [{}, {}];
+        todos = [
+            {completed: true},
+            {completed: true},
+            {completed: false},
+            {completed: false}
+        ];
+
         count = todos.length;
+        mockTodoSorter.mockImplementation(todos => todos);
+    });
+
+    afterEach(() => {
+        jest.resetAllMocks();
     });
 
     it('should have static propTypes defined', () => {
@@ -25,6 +39,55 @@ describe('<TodoListContainer />', () => {
         };
 
         expect(TodoListContainer).toHaveProperty('propTypes', expectedPropTypes);
+    });
+
+    describe('when connected to redux', function () {
+        let stubState,
+            stubStore;
+
+        beforeEach(() => {
+            stubState = {
+                todos: {
+                    collection: todos,
+                    count: todos.length
+                },
+                filters: {}
+            };
+        });
+
+        describe('with the completed filter enabled', () => {
+
+            beforeEach(() => {
+                stubState.filters.completed = true;
+
+                stubStore = mockStoreBuilder(stubState);
+
+                SUTWrapper = shallow(<ConnectedTodoListContainer store={stubStore}/>).dive();
+            });
+
+            it('should render correctly', () => {
+                expect(SUTWrapper).toMatchSnapshot();
+            });
+
+        });
+
+        describe('with the completed filter not enabled', () => {
+
+            beforeEach(() => {
+                stubState.filters.completed = false;
+
+                stubStore = mockStoreBuilder(stubState);
+
+                SUTWrapper = shallow(<ConnectedTodoListContainer store={stubStore}/>).dive();
+            });
+
+            it('should render correctly', () => {
+                expect(SUTWrapper).toMatchSnapshot();
+            });
+
+        });
+
+
     });
 
     describe('when constructing', () => {
@@ -81,78 +144,65 @@ describe('<TodoListContainer />', () => {
 
     });
 
-});
+    describe('_mapState', () => {
 
-describe('<TodoListContainer /> _mapState', () => {
-
-    describe('when executing', () => {
-        let results,
-            todos,
-            state;
-
-        beforeEach(() => {
-            todos = [
-                {completed: true},
-                {completed: true},
-                {completed: false},
-                {completed: false}
-            ];
-
-            state = {
-                filters: {},
-                todos: {
-                    collection: todos,
-                    count: todos.length
-                }
-            };
-
-            mockTodoSorter.mockImplementation(todos => todos);
-        });
-
-        afterAll(() => {
-            jest.resetAllMocks();
-        });
-
-        describe('with the completed filtered enabled', () => {
+        describe('when executing', () => {
+            let results,
+                state;
 
             beforeEach(() => {
-                state.filters.completed = true;
-                results = _mapState(state);
+                state = {
+                    filters: {},
+                    todos: {
+                        collection: todos,
+                        count: todos.length
+                    }
+                };
+
             });
 
-            it('should set the todos collection on the props without the completed todos', () => {
-                let expectedTodos = todos.filter(todo => !todo.completed);
+            describe('with the completed filtered enabled', () => {
 
-                expect(results).toHaveProperty('todos', expectedTodos);
+                beforeEach(() => {
+                    state.filters.completed = true;
+                    results = _mapState(state);
+                });
+
+                it('should set the todos collection on the props without the completed todos', () => {
+                    let expectedTodos = todos.filter(todo => !todo.completed);
+
+                    expect(results).toHaveProperty('todos', expectedTodos);
+                });
+
+                it('should set the todos count to the props', () => {
+                    expect(results).toHaveProperty('count', todos.length);
+                });
+
+                it('should sort the todos with the todoSorter', () => {
+                    expect(mockTodoSorter).toHaveBeenCalled();
+                });
+
             });
 
-            it('should set the todos count to the props', () => {
-                expect(results).toHaveProperty('count', todos.length);
-            });
+            describe('with the completed filtered disabled', () => {
 
-            it('should sort the todos with the todoSorter', () => {
-                expect(mockTodoSorter).toHaveBeenCalled();
-            });
+                beforeEach(() => {
+                    state.filters.completed = false;
+                    results = _mapState(state);
+                });
 
-        });
+                it('should set the todos collection on the props with the completed todos', () => {
+                    expect(results).toHaveProperty('todos', todos);
+                });
 
-        describe('with the completed filtered disabled', () => {
+                it('should set the todos count to the props', () => {
+                    expect(results).toHaveProperty('count', todos.length);
+                });
 
-            beforeEach(() => {
-                state.filters.completed = false;
-                results = _mapState(state);
-            });
+                it('should sort the todos with the todoSorter', () => {
+                    expect(mockTodoSorter).toHaveBeenCalled();
+                });
 
-            it('should set the todos collection on the props with the completed todos', () => {
-                expect(results).toHaveProperty('todos', todos);
-            });
-
-            it('should set the todos count to the props', () => {
-                expect(results).toHaveProperty('count', todos.length);
-            });
-
-            it('should sort the todos with the todoSorter', () => {
-                expect(mockTodoSorter).toHaveBeenCalled();
             });
 
         });
@@ -160,3 +210,5 @@ describe('<TodoListContainer /> _mapState', () => {
     });
 
 });
+
+

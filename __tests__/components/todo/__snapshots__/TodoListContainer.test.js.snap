@@ -1,6 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TodoListContainer /> constructing and rendering should render correctly 1`] = `
+exports[`<TodoListContainer /> when connected to redux with the completed filter enabled should render correctly 1`] = `
+<WithStyles(TodoList)
+  todos={
+    Array [
+      Object {
+        "completed": false,
+      },
+      Object {
+        "completed": false,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`<TodoListContainer /> when connected to redux with the completed filter not enabled should render correctly 1`] = `
+<WithStyles(TodoList)
+  todos={
+    Array [
+      Object {
+        "completed": true,
+      },
+      Object {
+        "completed": true,
+      },
+      Object {
+        "completed": false,
+      },
+      Object {
+        "completed": false,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`<TodoListContainer /> when rendering should render correctly 1`] = `
 <TodoList
   classes={
     Object {
@@ -9,8 +45,18 @@ exports[`<TodoListContainer /> constructing and rendering should render correctl
   }
   todos={
     Array [
-      Object {},
-      Object {},
+      Object {
+        "completed": true,
+      },
+      Object {
+        "completed": true,
+      },
+      Object {
+        "completed": false,
+      },
+      Object {
+        "completed": false,
+      },
     ]
   }
 />
