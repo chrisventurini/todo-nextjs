@@ -87,7 +87,6 @@ describe('<TodoListContainer />', () => {
 
         });
 
-
     });
 
     describe('when constructing', () => {
@@ -120,6 +119,85 @@ describe('<TodoListContainer />', () => {
 
             it('should have a set the scroll event to the instance onWindowScroll function ', () => {
                 expect(window.addEventListener).not.toHaveBeenCalled();
+            });
+
+        });
+
+    });
+
+    describe('when handling the window scrolling', () => {
+        let mockActions,
+            mockTodoFetchPage;
+
+        beforeEach(() => {
+            window.innerHeight = 5;
+            document.body = document.createElement('body');
+
+            mockTodoFetchPage = jest.fn();
+
+            mockActions = {
+                actions: {
+                    todoFetchPage: mockTodoFetchPage
+                }
+            };
+        });
+
+        describe('with there being more todos to fetch', () => {
+
+            beforeEach((done) => {
+                count = 10;
+
+                SUTWrapper = shallow(<TodoListContainer todos={todos} count={count} />);
+
+                SUTWrapper.setProps(mockActions, done);
+            });
+
+            describe('and the window has not scrolled to the bottom', () => {
+
+                beforeEach(() => {
+                    window.scrollY = -10;
+                    SUTWrapper.instance()._onWindowScroll();
+                });
+
+                it('should call the action todoFetchPage', () => {
+                   expect(mockTodoFetchPage).not.toHaveBeenCalled();
+                });
+
+            });
+
+            describe('and the window is scrolled to the bottom', () => {
+
+                beforeEach(() => {
+                    window.scrollY = 10;
+                    SUTWrapper.instance()._onWindowScroll();
+                });
+
+                it('should call the action todoFetchPage', () => {
+                   expect(mockTodoFetchPage).toHaveBeenCalled();
+                });
+
+            });
+
+        });
+
+        describe('with there being no more todos to fetch', () => {
+
+            beforeEach((done) => {
+                SUTWrapper = shallow(<TodoListContainer todos={todos} count={count} />);
+
+                SUTWrapper.setProps(mockActions, done);
+            });
+
+            describe('and the window is scrolled to the bottom', () => {
+
+                beforeEach(() => {
+                    SUTWrapper.instance()._onWindowScroll();
+                });
+
+                it('should not call the action todoFetchPage', () => {
+                   expect(mockTodoFetchPage).not.toHaveBeenCalled();
+                });
+
             });
 
         });

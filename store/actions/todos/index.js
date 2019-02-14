@@ -5,6 +5,7 @@ import { TODO_COMPLETE_SUCCESSFUL, todoCompleteSuccessful } from './todoComplete
 import { TODO_LOAD, todoLoad } from './todoLoad';
 import { TODO_DELETE, todoDelete } from './todoDelete';
 import { TODO_DELETE_SUCCESSFUL, todoDeleteSuccessful } from './todoDeleteSuccessful';
+import { TODO_FETCH_PAGE, todoFetchPage } from './todoFetchPage';
 import { TODO_SAVE, todoSave } from './todoSave';
 import { TODO_SAVE_SUCCESSFUL, todoSaveSuccessful } from './todoSaveSuccessful';
 import { TODO_UPDATE, todoUpdate } from './todoUpdate';
@@ -15,6 +16,7 @@ export const actions = {
     todoCompleteSuccessful,
     todoDelete,
     todoDeleteSuccessful,
+    todoFetchPage,
     todoLoad,
     todoUpdate,
     todoSave,
@@ -27,6 +29,7 @@ export const actionTypes = {
     TODO_COMPLETE_SUCCESSFUL,
     TODO_DELETE,
     TODO_DELETE_SUCCESSFUL,
+    TODO_FETCH_PAGE,
     TODO_LOAD,
     TODO_SAVE,
     TODO_SAVE_SUCCESSFUL,

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
-import { mapDispatchToTodoActions } from '../../store/actions/todos/index';
+import { actions, mapDispatchToTodoActions } from '../../store/actions/todos';
 import todoSorter from '../../services/todoSorter';
 
 import TodoList from './TodoList';
@@ -24,8 +24,15 @@ export class TodoListContainer extends Component {
         }
     }
 
-    _onWindowScroll(event) {
-        console.log('scroll');
+    _onWindowScroll() {
+        let { count, todos } = this.props;
+
+        if(count <= todos.length ||
+          (window.innerHeight + window.scrollY) <= document.body.offsetHeight) {
+            return;
+        }
+
+        this.props.actions.todoFetchPage();
     }
 
     render() {
