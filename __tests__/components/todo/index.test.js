@@ -10,6 +10,7 @@ import { TODO_UPDATE, todoUpdate } from '../../../store/actions/todos/todoUpdate
 import { TODO_UPDATE_SUCCESSFUL, todoUpdateSuccessful } from '../../../store/actions/todos/todoUpdateSuccessful';
 
 import { actions, actionTypes, mapDispatchToTodoActions } from "../../../store/actions/todos";
+
 // Mock imports
 jest.mock('redux');
 import { bindActionCreators }from 'redux';
