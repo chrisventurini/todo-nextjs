@@ -3,23 +3,31 @@ const express = require('express'),
     todoRepository = require('./data/todoRepository'),
     todoSorter = require('../services/todoSorter');
 
-module.exports = function (app) {
+let todosById = {
+
+    get: async function (req, res) {
+        let { id } = req.params,
+            todo = await todoRepository.getById(id);
+
+        res.send(todo);
+    },
+
+    delete: async function (req, res) {
+        let id = req.params.id;
+
+        await todoRepository.delete(id);
+
+        res.send('Success');
+    }
+
+};
+
+let setupFunc = function (app) {
     let todoRouter = express.Router();
 
     todoRouter.route('/todos/:id')
-        .get(async function (req, res) {
-            let { id } = req.params,
-                todo = await todoRepository.getById(id);
-
-            res.send(todo);
-        })
-        .delete(async function (req, res) {
-            let id = req.params.id;
-
-            await todoRepository.delete(id);
-
-            res.send('Success');
-        });
+        .get(todosById.get)
+        .delete(todosById.delete);
 
     todoRouter.route('/todos')
         .get(async function(req, res) {
@@ -40,3 +48,7 @@ module.exports = function (app) {
 
     app.use('/api', todoRouter);
 };
+
+setupFunc.todosById = todosById;
+
+module.exports = setupFunc;

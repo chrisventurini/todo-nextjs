@@ -26,7 +26,7 @@ export default (state = defaultState.todos, data) => {
             });
             newState = {
                 collection,
-                count: ++state.count
+                count: state.count
             };
             break;
         case actionTypes.TODO_SAVE_SUCCESSFUL:
