@@ -3,8 +3,33 @@ const express = require('express'),
     todoRepository = require('./data/todoRepository'),
     todoSorter = require('../services/todoSorter');
 
-let todosById = {
+let todos = {
+    get: async function(req, res) {
+        let defaults = { start: 0, count: 25 },
+            query = {
+                count: parseInt(req.query.count),
+                start: parseInt(req.query.start)
+            };
 
+        query = Object.assign({}, defaults, query);
+
+        let data = await todoRepository.getAll(query.start, query.count);
+
+        data.collection = todoSorter(data.collection);
+
+        res.send(data);
+    },
+    patch: async function(req, res) {
+        let todo = await todoRepository.update(req.body);
+        res.send(todo);
+    },
+    post: async function(req, res) {
+        let todo = await todoRepository.save(req.body);
+        res.status(201).send(todo);
+    }
+};
+
+let todosById = {
     get: async function (req, res) {
         let { id } = req.params,
             todo = await todoRepository.getById(id);
@@ -19,7 +44,6 @@ let todosById = {
 
         res.send('Success');
     }
-
 };
 
 let setupFunc = function (app) {
@@ -30,25 +54,14 @@ let setupFunc = function (app) {
         .delete(todosById.delete);
 
     todoRouter.route('/todos')
-        .get(async function(req, res) {
-            let data = await todoRepository.getAll();
-
-            data.collection = todoSorter(data.collection);
-
-            res.send(data);
-        })
-        .post(async function(req, res) {
-            let todo = await todoRepository.save(req.body);
-            res.status(201).send(todo);
-        })
-        .patch(async function(req, res) {
-            let todo = await todoRepository.update(req.body);
-            res.send(todo);
-        });
+        .get(todos.get)
+        .post(todos.post)
+        .patch(todos.patch);
 
     app.use('/api', todoRouter);
 };
 
+setupFunc.todos = todos;
 setupFunc.todosById = todosById;
 
 module.exports = setupFunc;

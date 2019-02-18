@@ -10,5 +10,5 @@ export let todoBuilder = (todo) => {
         title: loremIpsum({ count: 1 })
     };
 
-    return Object.assign({}, todo, defaultTodo);
+    return Object.assign({}, defaultTodo, todo);
 };

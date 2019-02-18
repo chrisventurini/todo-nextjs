@@ -18,16 +18,8 @@ let todoRepository = {
         });
     },
 
-    getAll: async function(options) {
-        if (options) {
-            options = {
-                where: {
-                    ...options
-                }
-            }
-        }
-
-        let data = await db.Todo.findAndCountAll(options);
+    getAll: async function(start, count) {
+        let data = await db.Todo.findAndCountAll();
 
         return {
             count: data.count,
