@@ -52,6 +52,10 @@ describe('todos API', () => {
             describe('with no specified params', () => {
 
                 beforeEach(() => {
+                    mockReq.query = {
+                        count: '',
+                        start: undefined
+                    };
                     return todos.get(mockReq, mockRes);
                 });
 

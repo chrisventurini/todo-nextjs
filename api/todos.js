@@ -5,15 +5,10 @@ const express = require('express'),
 
 let todos = {
     get: async function(req, res) {
-        let defaults = { start: 0, count: 25 },
-            query = {
-                count: parseInt(req.query.count),
-                start: parseInt(req.query.start)
-            };
+        let count = parseInt(req.query.count) || 25,
+            start = parseInt(req.query.start) || 0;
 
-        query = Object.assign({}, defaults, query);
-
-        let data = await todoRepository.getAll(query.start, query.count);
+        let data = await todoRepository.getAll(start, count);
 
         data.collection = todoSorter(data.collection);
 

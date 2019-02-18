@@ -19,7 +19,10 @@ let todoRepository = {
     },
 
     getAll: async function(start, count) {
-        let data = await db.Todo.findAndCountAll();
+        let data = await db.Todo.findAndCountAll({
+            limit: count,
+            offset: start
+        });
 
         return {
             count: data.count,
