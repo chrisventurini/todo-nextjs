@@ -18,11 +18,20 @@ let todoRepository = {
         });
     },
 
-    getAll: async function(start, count) {
-        let data = await db.Todo.findAndCountAll({
+    getAll: async function(start, count, completed) {
+        let query = {
             limit: count,
-            offset: start
-        });
+            offset: start,
+            order: [
+                ['completed', 'ASC'],
+                ['dueDate', 'ASC']
+            ],
+            where: {
+                completed: completed
+            }
+        };
+
+        let data = await db.Todo.findAndCountAll(query);
 
         return {
             count: data.count,

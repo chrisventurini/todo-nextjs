@@ -33,7 +33,7 @@ describe('todoRepository', () => {
                 count: stubTodos.length
             });
 
-            results = await todoRepository.getAll(0, 5);
+            results = await todoRepository.getAll(0, 5, false);
         });
 
         it('should return the todos retrieved from the database', () => {
@@ -44,7 +44,17 @@ describe('todoRepository', () => {
         });
 
         it('should call query the database with a limit and offset', () => {
-            expect(mockDb.Todo.findAndCountAll).toBeCalledWith({ limit: 5, offset: 0});
+            expect(mockDb.Todo.findAndCountAll).toBeCalledWith({
+                limit: 5,
+                offset: 0,
+                order: [
+                    ['completed', 'ASC'],
+                    ['dueDate', 'ASC']
+                ],
+                where: {
+                    completed: false
+                }
+            });
         });
 
     });

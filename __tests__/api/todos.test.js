@@ -7,9 +7,7 @@ import { todoBuilder } from '../../__testutils__/testDataBuilders';
 
 // Mocked imports
 jest.mock('../../api/data/todoRepository');
-jest.mock('../../services/todoSorter');
 import mockTodoRepo from '../../api/data/todoRepository';
-import mockTodoSorter from '../../services/todoSorter';
 
 describe('todos API', () => {
     let mockReq,
@@ -33,20 +31,15 @@ describe('todos API', () => {
     describe('bulk', () => {
 
         describe('when executing a get', () => {
-            let stubOrderedTodos,
-                stubTodos;
+            let stubTodos;
 
             beforeEach(() => {
-                stubOrderedTodos = [todoBuilder(), todoBuilder()];
-
                 stubTodos = [todoBuilder(), todoBuilder()];
 
                 mockTodoRepo.getAll.mockResolvedValue({
                     collection: stubTodos,
                     count: stubTodos.length
                 });
-
-                mockTodoSorter.mockReturnValue(stubOrderedTodos);
             });
 
             describe('with no specified params', () => {
@@ -54,24 +47,19 @@ describe('todos API', () => {
                 beforeEach(() => {
                     mockReq.query = {
                         count: '',
-                        start: undefined
                     };
                     return todos.get(mockReq, mockRes);
                 });
 
                 it('should return the ordered todos and count on the response', () => {
                     expect(mockRes.send).toBeCalledWith({
-                        collection: stubOrderedTodos,
-                        count: stubOrderedTodos.length
+                        collection: stubTodos,
+                        count: stubTodos.length
                     });
                 });
 
-                it('should call the todoSorter with the retrieved todos from the repository', () => {
-                    expect(mockTodoSorter).toHaveBeenCalledWith(stubTodos);
-                });
-
-                it('should call getAll on the todo repository with the default pagination params', () => {
-                    expect(mockTodoRepo.getAll).toHaveBeenCalledWith(0, 25);
+                it('should call getAll on the todo repository with the default pagination params and completed false', () => {
+                    expect(mockTodoRepo.getAll).toHaveBeenCalledWith(0, 25, false);
                 });
 
             });
@@ -87,15 +75,11 @@ describe('todos API', () => {
                     return todos.get(mockReq, mockRes);
                 });
 
-                it('should return the ordered todos and count on the response', () => {
+                it('should return the todos and count on the response', () => {
                     expect(mockRes.send).toBeCalledWith({
-                        collection: stubOrderedTodos,
-                        count: stubOrderedTodos.length
+                        collection: stubTodos,
+                        count: stubTodos.length
                     });
-                });
-
-                it('should call the todoSorter with the retrieved todos from the repository', () => {
-                    expect(mockTodoSorter).toHaveBeenCalledWith(stubTodos);
                 });
 
                 it('should call getAll on the todo repository with the default pagination params', () => {

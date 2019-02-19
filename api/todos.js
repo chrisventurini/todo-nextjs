@@ -1,16 +1,14 @@
 const express = require('express'),
 
-    todoRepository = require('./data/todoRepository'),
-    todoSorter = require('../services/todoSorter');
+    todoRepository = require('./data/todoRepository');
 
 let todos = {
     get: async function(req, res) {
         let count = parseInt(req.query.count) || 25,
-            start = parseInt(req.query.start) || 0;
+            start = parseInt(req.query.start) || 0,
+            completed = req.query.completed || false;
 
-        let data = await todoRepository.getAll(start, count);
-
-        data.collection = todoSorter(data.collection);
+        let data = await todoRepository.getAll(start, count, completed);
 
         res.send(data);
     },
