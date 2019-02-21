@@ -13,7 +13,6 @@ describe('<Loader />', () => {
             asyncCalls: propTypes.object.isRequired,
             classes: propTypes.object.isRequired,
         };
-        console.log(Loader.propTypes);
         expect(Loader).toHaveProperty('propTypes', expectedPropTypes);
     });
 

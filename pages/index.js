@@ -11,17 +11,19 @@ import todoService from '../services/todoService';
 
 class Index extends Component {
 
-    static async getInitialProps() {
+    static async getInitialProps(context) {
 
         if(process.browser) {
             return {};
         }
 
-        let data = await todoService.fetchAll();
+        let { completed } = context.query,
+
+            data = await todoService.fetchAll({ completed });
 
         store.dispatch(actions.todoLoad(data));
 
-        return { };
+        return {};
     }
 
     render () {

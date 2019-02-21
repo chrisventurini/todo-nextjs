@@ -83,7 +83,7 @@ describe('todos API', () => {
                 });
 
                 it('should call getAll on the todo repository with the default pagination params', () => {
-                    expect(mockTodoRepo.getAll).toHaveBeenCalledWith(5, 50);
+                    expect(mockTodoRepo.getAll).toHaveBeenCalledWith(5, 50, false);
                 });
 
             });

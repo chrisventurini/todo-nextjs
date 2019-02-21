@@ -6,7 +6,8 @@ import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import InputBase from '@material-ui/core/InputBase';
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
+
+import withStyles from "@material-ui/core/styles/withStyles";
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 

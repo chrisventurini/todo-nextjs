@@ -1,4 +1,4 @@
-import { actionTypes } from "../actions/filtering/";
+import { actionTypes } from "../actions/filtering";
 import * as effects from 'redux-saga/effects'
 
 export function* _addFilterParam() {
@@ -6,7 +6,7 @@ export function* _addFilterParam() {
 
     let completed = yield effects.select(store => store.filters.completed);
 
-    window.location.assign(`${curUrl}?complete=${completed}`);
+    window.location.assign(`${curUrl}?completed=${completed}`);
 }
 
 export default function* toggleFilterCompletedSaga() {

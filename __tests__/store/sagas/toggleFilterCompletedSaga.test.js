@@ -35,7 +35,7 @@ describe('toggleFilterCompletedSaga', () => {
         });
 
         it('should add the complete param to the url', () =>{
-            expect(window.location.assign).toBeCalledWith('http://localhost/?complete=true');
+            expect(window.location.assign).toBeCalledWith('http://localhost/?completed=true');
         });
 
         it('should get the state of completed filter from the store', () => {
