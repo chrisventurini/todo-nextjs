@@ -28,18 +28,18 @@ describe('<FilterHeaderContainer />', () => {
     });
 
     describe('When handling a completed filter clicked', () => {
-        let toggleFilterCompletedSpy;
+        let setFilterCompletedSpy;
 
         beforeEach((done) => {
             SUTWrapper = shallow(<FilterHeaderContainer
                                     asyncCalls={asyncCalls}
                                     filters={filters} />);
 
-            toggleFilterCompletedSpy = jest.fn();
+            setFilterCompletedSpy = jest.fn();
 
             SUTWrapper.setProps({
                 actions: {
-                    toggleFilterCompleted: toggleFilterCompletedSpy
+                    setFilterCompleted: setFilterCompletedSpy
                 }
             }, () => {
                 SUTWrapper.instance().handleCompletedClicked();
@@ -53,8 +53,8 @@ describe('<FilterHeaderContainer />', () => {
             expect(SUTWrapper.state('filterCompleted')).toBe(!filters.completed);
         });
 
-        it('should call the toggleFilterCompleted action', () => {
-            expect(toggleFilterCompletedSpy).toHaveBeenCalled();
+        it('should call the setFilterCompleted action', () => {
+            expect(setFilterCompletedSpy).toHaveBeenCalledWith(!filters.completed);
         });
 
     });

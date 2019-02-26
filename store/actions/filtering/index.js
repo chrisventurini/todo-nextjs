@@ -1,13 +1,13 @@
 import { bindActionCreators } from 'redux';
 
-import { TOGGLE_FILTER_COMPLETED, toggleFilterCompleted } from './toggleFilterCompleted'
+import { SET_FILTERED_COMPLETED, setFilterCompleted } from './setFilterCompleted'
 
 export const actions = {
-    toggleFilterCompleted
+    setFilterCompleted
 };
 
 export const actionTypes = {
-    TOGGLE_FILTER_COMPLETED
+    SET_FILTERED_COMPLETED
 };
 
 export const mapDispatchToFilterActions = dispatch => {

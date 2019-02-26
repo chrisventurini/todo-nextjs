@@ -6,7 +6,8 @@ import Loader from '../components/async/Loader';
 import TodoListContainer from '../components/todo/TodoListContainer';
 
 import store from '../store';
-import { actions } from '../store/actions/todos';
+import { actions as filterActions } from '../store/actions/filtering';
+import { actions as todoActions } from '../store/actions/todos';
 import todoService from '../services/todoService';
 
 class Index extends Component {
@@ -17,11 +18,12 @@ class Index extends Component {
             return {};
         }
 
-        let { completed } = context.query,
+        let filterCompleted  = context.query.filterCompleted !== 'false',
 
-            data = await todoService.fetchAll({ completed });
+            data = await todoService.fetchAll({ completed: !filterCompleted });
 
-        store.dispatch(actions.todoLoad(data));
+        store.dispatch(todoActions.todoLoad(data));
+        store.dispatch(filterActions.setFilterCompleted(filterCompleted));
 
         return {};
     }

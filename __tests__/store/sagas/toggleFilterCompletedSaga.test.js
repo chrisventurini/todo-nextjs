@@ -19,27 +19,58 @@ describe('toggleFilterCompletedSaga', () => {
         });
 
         it('should take every TOGGLE_FILTER_COMPLETED action and with the _addFilterParam function', () => {
-            expect(mockEffects.takeEvery).toBeCalledWith(actionTypes.TOGGLE_FILTER_COMPLETED, _addFilterParam);
+            expect(mockEffects.takeEvery).toBeCalledWith(actionTypes.SET_FILTERED_COMPLETED, _addFilterParam);
         });
 
     });
 
     describe('when adding the filter parameter to the current URL', () => {
 
-        beforeEach(() => {
-            window.location.assign = jest.fn();
+        describe('and not within a browser', () => {
 
-            let resultGen =_addFilterParam();
-            resultGen.next();
-            resultGen.next(true);
+            beforeEach(() => {
+                process.browser = false;
+                window.history.pushState = jest.fn();
+
+                let resultGen =_addFilterParam();
+                resultGen.next();
+                resultGen.next(true);
+            });
+
+            it('should not add the complete param to the url', () =>{
+                expect(window.history.pushState).not.toBeCalled();
+            });
+
+            it('should get the state of completed filter from the store', () => {
+                expect(mockEffects.select).not.toBeCalled();
+            });
+
         });
 
-        it('should add the complete param to the url', () =>{
-            expect(window.location.assign).toBeCalledWith('http://localhost/?completed=true');
-        });
+        describe('and within a browser', () => {
 
-        it('should get the state of completed filter from the store', () => {
-            expect(mockEffects.select).toBeCalled();
+            beforeEach(() => {
+                process.browser = true;
+                window.history.pushState = jest.fn();
+
+                let resultGen =_addFilterParam();
+                resultGen.next();
+                resultGen.next(true);
+            });
+
+            it('should add the complete param to the url', () =>{
+                let expPath = 'http://localhost/?filterCompleted=true';
+
+                expect(window.history.pushState).toBeCalledWith({
+                        path: expPath
+                    }, '', expPath
+                );
+            });
+
+            it('should get the state of completed filter from the store', () => {
+                expect(mockEffects.select).toBeCalled();
+            });
+
         });
 
     });

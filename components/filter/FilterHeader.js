@@ -32,10 +32,11 @@ const styles = {
 };
 
 const FilterHeader = ({asyncCallsInProgress, classes, completedFiltered, onCompletedClick}) => {
-
     let icon = completedFiltered ? (<RadioButtonChecked />) : (<RadioButtonUnchecked/>),
 
         completedClasses = asyncCallsInProgress ? classes.completedFilterBtnDisabled : classes.completedFilterBtn;
+
+    console.log('header: ' + completedFiltered);
 
     return (
         <AppBar className={classes.filterHeader} >

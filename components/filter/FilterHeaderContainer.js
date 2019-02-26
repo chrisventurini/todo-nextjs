@@ -25,10 +25,9 @@ export class FilterHeaderContainer extends Component {
     }
 
     handleCompletedClicked() {
-        this.props.actions.toggleFilterCompleted();
-        this.setState({
-            filterCompleted: !this.state.filterCompleted
-        });
+        let filterCompleted = !this.state.filterCompleted;
+        this.props.actions.setFilterCompleted(filterCompleted);
+        this.setState({ filterCompleted });
     }
 
     render() {

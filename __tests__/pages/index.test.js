@@ -5,17 +5,17 @@ import IndexPage from '../../pages/index';
 // Mock Dependencies
 jest.mock('../../store');
 jest.mock('../../store/sagas');
+jest.mock('../../store/actions/filtering');
 jest.mock('../../store/actions/todos');
 jest.mock('../../services/todoService');
 
-import { actions } from '../../store/actions/todos';
+import { actions as mockFilteringActions } from '../../store/actions/filtering';
+import { actions as mockTodoActions } from '../../store/actions/todos';
 import mockStore from '../../store';
 import mockTodoService from '../../services/todoService';
 
 
 describe('<Index> page', () => {
-    let mockActions = actions;
-
     afterEach(() => {
         jest.resetAllMocks();
     });
@@ -42,31 +42,40 @@ describe('<Index> page', () => {
 
             it('should not dispatch a todoLoad event', () => {
                 expect(mockStore.dispatch).not.toHaveBeenCalled();
-                expect(mockActions.todoLoad).not.toHaveBeenCalled();
+                expect(mockTodoActions.todoLoad).not.toHaveBeenCalled();
             });
 
         });
 
         describe('when not in the browser', () => {
-            let stubAction,
+            let stubFilterAction,
+                stubTodoAction,
                 stubTodos;
 
             beforeEach(async () => {
-                stubAction = { type: 'stub' };
+                stubFilterAction = { type: 'filter' };
+                stubTodoAction = { type: 'todo' };
                 stubTodos = [{}, {}];
                 stubContext = {
-                    query: { completed: true }
+                    query: { filterCompleted: 'true' }
                 };
                 process.browser = false;
 
+                mockFilteringActions.setFilterCompleted.mockReturnValue(stubFilterAction);
+
                 mockTodoService.fetchAll.mockReturnValue(stubTodos);
-                mockActions.todoLoad.mockReturnValue(stubAction);
+                mockTodoActions.todoLoad.mockReturnValue(stubTodoAction);
 
                 results = await IndexPage.getInitialProps(stubContext);
             });
 
             it('should fetch todos with the complete param', () => {
-                expect(mockTodoService.fetchAll).toHaveBeenCalledWith({ completed: true });
+                expect(mockTodoService.fetchAll).toHaveBeenCalledWith({ completed: false });
+            });
+
+            it('should dispatch the completed filter', () => {
+                expect(mockStore.dispatch).toHaveBeenCalledWith(stubFilterAction);
+                expect(mockFilteringActions.setFilterCompleted).toHaveBeenCalledWith(true);
             });
 
             it('should return an empty object', () => {
@@ -74,9 +83,10 @@ describe('<Index> page', () => {
             });
 
             it('should dispatch a todoLoad event', () => {
-                expect(mockStore.dispatch).toHaveBeenCalledWith(stubAction);
-                expect(mockActions.todoLoad).toHaveBeenCalledWith(stubTodos);
+                expect(mockStore.dispatch).toHaveBeenCalledWith(stubTodoAction);
+                expect(mockTodoActions.todoLoad).toHaveBeenCalledWith(stubTodos);
             });
+
 
         });
 
