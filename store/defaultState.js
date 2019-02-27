@@ -1,6 +1,4 @@
-
-
-let defaultState = {
+export let _defaultState = {
     filters: {
         completed: true
     },
@@ -40,4 +38,4 @@ export let _bootstrapFilters = (state) => {
 
 
 
-export default _bootstrapFilters(defaultState);
+export default _bootstrapFilters(_defaultState);

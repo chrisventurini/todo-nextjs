@@ -1,32 +1,33 @@
-import defaultState, { _bootstrapFilters } from '../../store/defaultState';
+import { _bootstrapFilters, _defaultState } from '../../store/defaultState';
 
-describe('defaultStore', () => {
+describe('_defaultStore', () => {
 
-    describe('not within the browser', () => {
+    it('should be the expected object', () => {
+        let expectedObj = {
+            filters: {
+                completed: true
+            },
+            todos: {
+                collection: [],
+                count: 0
+            },
+            asyncCalls: {
+                inProgress: false,
+                num: 0
+            }
+        };
 
-        it('should be the expected object', () => {
-            process.browser = false;
-
-            let expectedObj = {
-                filters: {
-                    completed: true
-                },
-                todos: {
-                    collection: [],
-                    count: 0
-                },
-                asyncCalls: {
-                    inProgress: false,
-                    num: 0
-                }
-            };
-
-            expect(defaultState).toEqual(expectedObj);
-        });
-
+        expect(_defaultState).toEqual(expectedObj);
     });
+});
+
+describe('_bootstrapFilters', () => {
 
     describe('within the browser', () => {
+
+        beforeEach(() => {
+            process.browser = true;
+        });
 
         describe('with params', () =>{
 
@@ -39,12 +40,10 @@ describe('defaultStore', () => {
                 ])
                     .forEach(([param, expected]) => {
 
-                        // TODO: rewrite to test bootstrap function in isolation
                     it('should be the expected object', () => {
-                        process.browser = true;
                         window.history.pushState({}, 'Test Title', `/?${param}&blah=false`);
 
-                        let SUT = _bootstrapFilters(defaultState);
+                        let results = _bootstrapFilters(_defaultState);
                         let expectedObj = {
                             filters: {
                                 completed: expected
@@ -59,7 +58,7 @@ describe('defaultStore', () => {
                             }
                         };
 
-                        expect(SUT).toEqual(expectedObj);
+                        expect(results).toEqual(expectedObj);
                     });
 
                 });
@@ -70,28 +69,26 @@ describe('defaultStore', () => {
 
         describe('without params', () =>{
 
-            describe('should return the expected object', () => {
+            it('should be the expected object', () => {
+                window.history.pushState({}, 'Test Title', '');
 
-                it('should be the expected object', () => {
-                    window.history.pushState({}, 'Test Title', '');
+                let results = _bootstrapFilters(_defaultState);
 
-                    let expectedObj = {
-                        filters: {
-                            completed: true
-                        },
-                        todos: {
-                            collection: [],
-                            count: 0
-                        },
-                        asyncCalls: {
-                            inProgress: false,
-                            num: 0
-                        }
-                    };
+                let expectedObj = {
+                    filters: {
+                        completed: true
+                    },
+                    todos: {
+                        collection: [],
+                        count: 0
+                    },
+                    asyncCalls: {
+                        inProgress: false,
+                        num: 0
+                    }
+                };
 
-                    expect(defaultState).toEqual(expectedObj);
-                });
-
+                expect(results).toEqual(expectedObj);
             });
 
         });

@@ -5,7 +5,7 @@ import todoEditedSaga  from './todoUpdateSaga';
 import todoFetchPageSage from './todoFetchPageSaga';
 import todoLoadSaga from './todoLoadSaga';
 import todoSaveSaga from './todoSaveSaga';
-import toggleFilterCompletedSaga from './toggleFilterCompletedSaga';
+import filterCompletedSaga from './filterCompletedParamSaga';
 
 export default (sagaMiddleware) => {
     sagaMiddleware.run(routeHomeSage);
@@ -15,5 +15,5 @@ export default (sagaMiddleware) => {
     sagaMiddleware.run(todoFetchPageSage);
     sagaMiddleware.run(todoLoadSaga);
     sagaMiddleware.run(todoSaveSaga);
-    sagaMiddleware.run(toggleFilterCompletedSaga);
+    sagaMiddleware.run(filterCompletedSaga);
 };

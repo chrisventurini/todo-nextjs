@@ -29,6 +29,7 @@
     "node-minify": "^3.6.0",
     "node-sass": "^4.9.4",
     "prop-types": "^15.6.2",
+    "query-string": "^6.2.0",
     "react": "16.6.0",
     "react-dom": "16.6.0",
     "react-jss": "8.6.1",

@@ -5,7 +5,7 @@ import todoEditedSaga  from '../../../store/sagas/todoUpdateSaga';
 import todoFetchPageSaga from '../../../store/sagas/todoFetchPageSaga';
 import todoLoadSaga from '../../../store/sagas/todoLoadSaga';
 import todoSaveSaga from '../../../store/sagas/todoSaveSaga';
-import toggleFilterCompletedSaga from '../../../store/sagas/toggleFilterCompletedSaga';
+import toggleFilterCompletedSaga from '../../../store/sagas/filterCompletedParamSaga';
 
 import sageSetup from '../../../store/sagas';
 
